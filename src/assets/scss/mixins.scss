@@ -1,0 +1,49 @@
+// mixins
+@mixin defaultfont {
+    font-family: Lato, sans-serif;
+    font-style: normal;
+    font-weight: 300;
+}
+
+@mixin imagecontainer {
+    background-color: #e5ecf3;
+    border-radius: 10%;
+    border-color: #abd2f3;
+    border: 2px solid transparent;
+    position: relative;
+    width: 74px;
+    height: 74px;
+}
+
+@mixin imagecontainer_img {
+    border: 3px solid #fff;
+    height: 70px;
+    width: 70px;
+    border-radius: 10%;
+    display: inline-block;
+}
+
+@mixin cardcontainer {
+    //border-radius: 10px;
+    //box-shadow: 0 .3rem 0.3rem rgba(0, 0, 0, .1);
+    //margin-bottom: .5rem;
+    border: 0;
+    background-color: $white;
+    cursor: pointer;
+    border-bottom: 1px solid #cde1ef;
+}
+
+@mixin cardcontainer_hover {
+    opacity: 0.8;
+    transition: .2s ease-in-out;
+}
+
+@mixin userselect {
+    -webkit-overflow-scrolling: touch;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

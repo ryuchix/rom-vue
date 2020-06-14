@@ -1,0 +1,179 @@
+.equipment {
+    display: inline-block;
+    width: 100%;
+    clear: both;
+    padding: 5px;
+    .single-row {
+        display: flex;
+        .image-container {
+            float: left;
+            width: 60px;
+        }
+        .image {
+            @include imagecontainer;
+        }
+        img {
+           @include imagecontainer_img;
+        }
+        .item-title {
+            text-transform: capitalize;
+            font-weight: 500;
+            h2 {
+                font-size: 1.3em;
+                padding: 2px .9em;
+                overflow: hidden;
+                color: $primary;
+            }
+        }
+        .item-title-info {
+            display: inline-block;
+            margin: 0 1.2em;
+            .type {
+                color: $accent;
+                font-weight: 600;
+                text-transform: uppercase;
+                font-size: 0.9em;
+                
+            }
+        }
+    }
+
+    .description {
+        display: flex;
+        margin: 1em 0;
+        padding: 10px;
+        background: $backgroundcolor;
+        border-radius: 2px;
+        .inner-description {
+            font-size: 0.9em;
+            letter-spacing: 1;
+        }
+    }
+
+    .sub-heading {
+        width: 100%;
+        padding: 5px;
+        border-radius: 2px;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: $primary;
+        font-size: 0.9em;
+    }
+
+    .attributes {
+        margin-left: 7px;
+        ul {
+            li {
+                font-size: 0.9em;
+                line-height: 1.7em;
+                color: $black;
+                position: relative;
+                padding-left: 14px;
+                &:before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    width: 0;
+                    height: 0;
+                    margin-top: 6px;
+                    width: 0;
+                    height: 0;
+                    border-style: solid;
+                    border-width: 5px 0 5px 7px;
+                    border-color: transparent transparent transparent $accent;
+                }
+            }
+        }
+    }
+    .jobs {
+        .pill {
+            li {
+                display: inline-block;
+                margin: 0 5px 5px 0;
+                padding: 0 0.5em;
+                border-radius: 1rem;
+                background-color: $accent;
+                font-size: 0.8rem;
+                color: $white;
+                &:hover {
+                    @include userselect;
+                    background-color: $primary
+                }
+            }
+        }
+    }
+    .tiers, .set-effect {
+        .accordion {
+            border-radius: 0;
+            .v-expansion-panel {
+                border: 1px solid $bordercolor;
+            }
+            .v-expansion-panel-header__icon {
+                margin-left: auto;
+            }
+            .v-expansion-panel-header--active {
+                border-bottom: 1px solid $bordercolor;
+                min-height: 48px;
+            }
+            .v-expansion-panel-content__wrap {
+                padding: 10px 24px 16px;
+            }
+        }
+    }
+
+    .attr {
+        overflow: hidden;
+        position: relative;
+        margin-top: 10px;
+        border: 1px solid $bordercolor;
+        border-radius: 5px;
+        dl {
+            overflow: hidden;
+            position: relative;
+            float: left;
+            width: 100%;
+            padding: 7px 0;
+            border-top: 1px solid $bordercolor;
+            &:first-child {
+                border-top: none;
+            }
+        }
+        dt {
+            float: left;
+            width: 10em;
+            text-indent: 10px;
+        }
+        dd {
+            overflow: hidden;
+            color: $secondary;
+            &.single-row {
+                display: flex;
+                align-items: center;
+            }
+        }
+        .full {
+            float: none;
+            width: auto;
+        }
+        .single-row {
+            font-size: 0.8em;
+            .image-container {
+                float: left;
+                width: 60px;
+            }
+            .image {
+                margin-right: 5px;
+                width: 29px !important;
+                height: 29px !important;
+                @include imagecontainer;
+            }
+            img {
+                border: 1px solid $white !important;
+                width: 25px !important;
+                height: 25px !important;
+               @include imagecontainer_img;
+            }
+        }
+    }
+
+}
