@@ -18,6 +18,17 @@
                                 Weapon - Staff
                             </div>
                         </div>
+                        <div class="item-tags">
+                            <div class="tag disable">
+                                <i class="material-icons">check</i> Tradable
+                            </div>
+                            <div class="tag enable">
+                                <i class="material-icons">close</i> Slotted
+                            </div>
+                            <div class="tag">
+                                <i class="material-icons">close</i> Upgradable
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -60,7 +71,61 @@
               </dl>
               </div>
 
+            <div class="sub-heading clear">
+                <h3>Dropped by</h3>
+            </div>
+            <div class="dropped">
+              <div class="monsters row no-gutters" @click="$router.push({name: 'monster', id: 1})">
+                  <div class="col-sm-12 col-12">
+                      <div class="monster-details">
+                          <div class="monster-image undead">
+                              <img src="https://www.romcodex.com/icons/face/panda_poring_1.png" alt="Icon">
+                          </div>
+                      </div>
+                      <div class="monster-info">
+                          <div class="monster-name">Boitata</div>
+                          <div class="monster-attr">
+                              <div class="monster-stats_">
+                                  Fire<span> · </span>
+                                  Brute<span> · </span>
+                                  Large
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="monsters row no-gutters" @click="$router.push({name: 'monster', id: 1})">
+                  <div class="col-sm-12 col-12">
+                      <div class="monster-details">
+                          <div class="monster-image mvp">
+                              <img src="https://www.romcodex.com/icons/face/panda_poring_1.png" alt="Icon">
+                          </div>
+                      </div>
+                      <div class="monster-info">
+                          <div class="monster-name">Boitata</div>
+                          <div class="monster-attr">
+                              <div class="monster-stats_">
+                                  Fire<span> · </span>
+                                  Brute<span> · </span>
+                                  Large
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
 
+            <div class="sub-heading clear">
+                <h3>Jobs</h3>
+            </div>
+            <div class="jobs">
+              <ul class="pill">
+                <li>Warlock</li>
+                <li>Super novice</li>
+                <li>Assassin</li>
+                <li>Knight</li>
+              </ul>
+            </div>
             <div class="clear"></div>
             <div class="sub-heading">
                 <h3>Set effect</h3>
@@ -101,15 +166,18 @@
 
             <div class="clear"></div>
             <div class="sub-heading">
-                <h3>Jobs</h3>
+                <h3>Upgrade</h3>
             </div>
-            <div class="jobs">
-              <ul class="pill">
-                <li>Warlock</li>
-                <li>Super novice</li>
-                <li>Assassin</li>
-                <li>Knight</li>
-              </ul>
+            <div class="tiers">
+              <v-expansion-panels accordion class="accordion" flat="true">
+                <v-expansion-panel>
+                  <v-expansion-panel-header>LUK +1, Def +13</v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+
+              </v-expansion-panels>
             </div>
 
 

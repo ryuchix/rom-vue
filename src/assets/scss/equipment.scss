@@ -36,6 +36,29 @@
                 
             }
         }
+        .item-tags {
+            display: flex;
+            margin: 0 1.2em;
+            .tag {
+                display: flex;
+                align-items: center;
+                i {
+                    font-size: 0.9em;
+                }
+                &.disable {
+                    color: $disabled;
+                }
+                &.enable {
+                    color: $accent;
+                }
+                background-color: $backgroundcolor;
+                margin-right: 0.6em;
+                padding: 0 5px;
+                border: 1px solid $bordercolor;
+                border-radius: 3px;
+                font-size: 0.9em;
+            }
+        }
     }
 
     .description {
@@ -172,6 +195,114 @@
                 width: 25px !important;
                 height: 25px !important;
                @include imagecontainer_img;
+            }
+        }
+    }
+    .dropped {
+        .monsters {
+            padding: 0;
+            width: 100%;
+            margin-bottom: 0;
+            transition: .2s ease-in-out;
+            padding: 2px;
+            display: flex;
+            border: 1px solid transparent;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            flex-direction: row;
+            align-items: center;
+            &:hover {
+                background-color: $backgroundcolor;
+            }
+            .monster-details {
+                display: inline-block;
+                line-height: 10px;
+            }
+            .col-12 {
+                display: flex;
+            }
+            .monster-image {
+                width: 44px !important;
+                height: 44px !important;
+                @include imagecontainer;
+                &.mvp {
+                    &:after {
+                        background: url('assets/images/monster-icon-min.png') 0;
+                        background-repeat: no-repeat;
+                        position: absolute;
+                        top: -4px;
+                        left: -4px;
+                        background-size: 80px;
+                        content: "";
+                        width: 15px;
+                        height: 15px;
+                        background-position: 0 0;
+                    }
+                }
+                &.mini {
+                    &:after {
+                        background: url('assets/images/monster-icon-min.png') 0;
+                        background-repeat: no-repeat;
+                        position: absolute;
+                        top: -4px;
+                        left: -4px;
+                        background-size: 80px;
+                        content: "";
+                        width: 27px;
+                        height: 14px;
+                        background-position: -15px 0;
+                    }
+                }
+                &.star {
+                    &:after {
+                        background: url('assets/images/monster-icon-min.png') 0;
+                        background-repeat: no-repeat;
+                        position: absolute;
+                        top: 0px;
+                        left: auto;
+                        right: 0;
+                        background-size: 80px;
+                        content: "";
+                        width: 18px;
+                        height: 18px;
+                        background-position: 8px -16px;
+                    }
+                }
+                &.undead {
+                    &:after {
+                        background: url('assets/images/monster-icon-min.png') 0;
+                        background-repeat: no-repeat;
+                        position: absolute;
+                        top: -5px;
+                        left: -5px;
+                        background-size: 80px;
+                        content: "";
+                        width: 32px;
+                        height: 32px;
+                        background-position: -15px -13px;
+                    }
+                }
+            }
+            img {                
+                border: 1px solid $white !important;
+                width: 40px !important;
+                height: 40px !important;
+               @include imagecontainer_img;
+            }
+            .monster-info {
+                align-self: end;
+                .monster-name {
+                    margin-left: 6px;
+                    font-size: 1em;
+                    font-weight: 500;
+                    color: $primary;
+                }
+                .monster-attr {
+                    color: $disabled;
+                    margin-left: 6px;
+                    font-size: 0.7em;
+                    margin-top: -5px;
+                }
             }
         }
     }
