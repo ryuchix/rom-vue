@@ -7,19 +7,19 @@
 
 @mixin imagecontainer {
     background-color: #e5ecf3;
-    border-radius: 10%;
-    border-color: #abd2f3;
-    border: 2px solid transparent;
+    border-radius: 5%;
+    border: 2px solid #abd2f3;
     position: relative;
     width: 74px;
     height: 74px;
 }
 
 @mixin imagecontainer_img {
-    border: 3px solid #fff;
+    border: 1px solid #fff;
     height: 70px;
     width: 70px;
-    border-radius: 10%;
+    padding: 10px;
+    border-radius: 5%;
     display: inline-block;
 }
 

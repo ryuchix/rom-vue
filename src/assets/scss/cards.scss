@@ -1,20 +1,38 @@
-.equipments {
+.cards {
     position: relative;
     overflow: hidden;
     padding: 10px;
     border-bottom: 1px solid $bordercolor;
     display: flex;
     cursor: pointer;
-    .equipment-details {
+    .card-details {
         display: inline-block;
         line-height: 10px;
         .image {
+            &.white {
+                border: 2px solid $cardwhite;
+            }
+            &.blue {
+                border: 2px solid $cardblue;
+            }
+            &.green {
+                border: 2px solid $cardgreen;
+            }
+            &.violet {
+                border: 2px solid $cardviolet;
+            }
             @include imagecontainer;
+            width: 74px;
+            height: 100px;
             img {
                 @include imagecontainer_img;
+                width: 70px;
+                height: 96px;
+                padding: 0px;
+                border: 0px solid #fff;
             }
         }
-        .equipment-type {
+        .card-type {
             position: relative;
             padding: 5px 0;
             text-align: center;
@@ -22,29 +40,46 @@
             line-height: 1.2em;
         }
     }
-    .equipment-info {
+    .card-info {
         align-self: center;
-        .equipment-name {
+        .card-name {
             margin-left: 6px;
-            font-size: 1.2em;
+            font-size: 1.1em;
             font-weight: 500;
             color: $primary;
         }
-        .equipment-attr {
+        .card-attr {
             margin-left: 6px;
-            .equipment-type_ {
+            .card-type_ {
                 color: $accent;
+                font-size: .7em;
                 font-weight: 600;
+                letter-spacing: 1px;
                 text-transform: uppercase;
-                font-size: 0.9em;
+            }
+            .card-type__ {
+                margin-top: 5px;
+                color: $accent;
+                font-size: .6em;
+                font-weight: 600;
+                letter-spacing: 1px;
+                text-transform: uppercase;
             }
         }
-        .equipment-stats {
+        .card-stats {
             margin-left: 2px;
             margin-top: 3px;
+            &.deposit {
+                font-size: 0.8em;
+                margin-top: -0.5em;
+            }
+            &.unlock {
+                font-size: 0.8em;
+                margin-top: -0.5em;
+            }
             ul {
                 li {
-                    font-size: 0.9em;
+                    font-size: 0.8em;
                     line-height: 1.5em;
                     color: $black;
                     position: relative;

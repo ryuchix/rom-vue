@@ -1,20 +1,28 @@
-.equipments {
+.furnitures {
+  border-bottom: 1px solid $bordercolor;
+  .furnitures_ {
     position: relative;
     overflow: hidden;
     padding: 10px;
-    border-bottom: 1px solid $bordercolor;
     display: flex;
     cursor: pointer;
-    .equipment-details {
+    .card-details {
         display: inline-block;
         line-height: 10px;
         .image {
+            border: 2px solid #abd2f3;
             @include imagecontainer;
+            width: 74px;
+            height: 74px;
             img {
                 @include imagecontainer_img;
+                width: 70px;
+                height: 70px;
+                padding: 3px;
+                border: 0px solid #fff;
             }
         }
-        .equipment-type {
+        .card-type {
             position: relative;
             padding: 5px 0;
             text-align: center;
@@ -22,29 +30,45 @@
             line-height: 1.2em;
         }
     }
-    .equipment-info {
-        align-self: center;
-        .equipment-name {
+    .card-info {
+        .card-name {
             margin-left: 6px;
-            font-size: 1.2em;
+            font-size: 1.1em;
             font-weight: 500;
             color: $primary;
         }
-        .equipment-attr {
+        .card-attr {
             margin-left: 6px;
-            .equipment-type_ {
+            .card-type_ {
                 color: $accent;
+                font-size: .7em;
                 font-weight: 600;
+                letter-spacing: 1px;
                 text-transform: uppercase;
-                font-size: 0.9em;
+            }
+            .card-type__ {
+                margin-top: -3px;
+                color: $accent;
+                font-size: .6em;
+                font-weight: 600;
+                letter-spacing: 1px;
+                text-transform: uppercase;
             }
         }
-        .equipment-stats {
+        .card-stats {
             margin-left: 2px;
             margin-top: 3px;
+            &.deposit {
+                font-size: 0.8em;
+                margin-top: -0.5em;
+            }
+            &.unlock {
+                font-size: 0.8em;
+                margin-top: -0.5em;
+            }
             ul {
                 li {
-                    font-size: 0.9em;
+                    font-size: 0.8em;
                     line-height: 1.5em;
                     color: $black;
                     position: relative;
@@ -66,4 +90,19 @@
             }
         }
     }
+  }
+  .unlocks, .requirements {
+    display: flex;
+    .unlocked {
+      color: $accent;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.8em;
+      padding: 2px 10px;
+    }
+    .unlocked-stats {
+      font-size: 0.9em;
+      padding: 0 5px 0 5px;
+    }
+  }
 }

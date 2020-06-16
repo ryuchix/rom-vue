@@ -20,13 +20,13 @@
                         </div>
                         <div class="item-tags">
                             <div class="tag disable">
-                                <i class="material-icons">check</i> Tradable
+                                <i class="material-icons">check</i> Trade
                             </div>
                             <div class="tag enable">
-                                <i class="material-icons">close</i> Slotted
+                                <i class="material-icons">close</i> Slot
                             </div>
                             <div class="tag">
-                                <i class="material-icons">close</i> Upgradable
+                                <i class="material-icons">close</i> Upgrade
                             </div>
                         </div>
                     </div>
@@ -131,7 +131,7 @@
                 <h3>Set effect</h3>
             </div>
             <div class="set-effect">
-              <v-expansion-panels accordion class="accordion" flat="true">
+              <v-expansion-panels accordion class="accordion" flat="flat">
                 <v-expansion-panel>
                   <v-expansion-panel-header>[Set 1] Ninja Suit Sakura + Calder Dagger</v-expansion-panel-header>
                   <v-expansion-panel-content>
@@ -147,7 +147,7 @@
                 <h3>Item tier</h3>
             </div>
             <div class="tiers">
-              <v-expansion-panels accordion class="accordion" flat="true">
+              <v-expansion-panels accordion class="accordion" flat="flat">
                 <v-expansion-panel>
                   <v-expansion-panel-header>LUK +1, Def +13</v-expansion-panel-header>
                   <v-expansion-panel-content>
@@ -169,7 +169,7 @@
                 <h3>Upgrade</h3>
             </div>
             <div class="tiers">
-              <v-expansion-panels accordion class="accordion" flat="true">
+              <v-expansion-panels accordion class="accordion" flat="flat">
                 <v-expansion-panel>
                   <v-expansion-panel-header>LUK +1, Def +13</v-expansion-panel-header>
                   <v-expansion-panel-content>

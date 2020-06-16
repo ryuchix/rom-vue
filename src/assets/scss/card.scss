@@ -1,4 +1,4 @@
-.equipment {
+.card {
     display: inline-block;
     width: 100%;
     clear: both;
@@ -11,11 +11,18 @@
         }
         .image {
             @include imagecontainer;
+            width: 90px;
+            height: 120px;
         }
         img {
            @include imagecontainer_img;
+           width: 86px;
+           height: 116px;
+           padding: 0px;
+           border: 0px solid #fff;
         }
         .item-title {
+            margin: 0 1em;
             text-transform: capitalize;
             font-weight: 500;
             h2 {
@@ -27,7 +34,7 @@
         }
         .item-title-info {
             display: inline-block;
-            margin: 0 1.2em;
+            margin: 0 2.2em;
             .type {
                 color: $accent;
                 font-weight: 600;
@@ -38,7 +45,7 @@
         }
         .item-tags {
             display: flex;
-            margin: 0 1.2em;
+            margin: 5px 2.2em;
             .tag {
                 display: flex;
                 align-items: center;
@@ -60,16 +67,50 @@
             }
         }
     }
-
-    .description {
-        display: flex;
-        margin: 1em 0;
-        padding: 10px;
-        background: $backgroundcolor;
-        border-radius: 2px;
-        .inner-description {
+    .card-type__ {
+        margin-left: 6px;
+        margin-top: 5px;
+        color: $accent;
+        font-size: .7em;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+    .card-stats {
+        margin-left: 2px;
+        margin-top: 3px;
+        &.deposit {
             font-size: 0.9em;
-            letter-spacing: 1;
+            margin-top: -0.2em;
+            margin-left: 6px;
+        }
+        &.unlock {
+            font-size: 0.9em;
+            margin-top: -0.2em;
+            margin-left: 6px;
+        }
+        ul {
+            margin-left: 6px;
+            li {
+                font-size: 0.9em;
+                line-height: 1.5em;
+                color: $black;
+                position: relative;
+                padding-left: 14px;
+                &:before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    width: 0;
+                    height: 0;
+                    margin-top: 6px;
+                    width: 0;
+                    height: 0;
+                    border-style: solid;
+                    border-width: 5px 0 5px 7px;
+                    border-color: transparent transparent transparent $accent;
+                }
+            }
         }
     }
 
@@ -108,98 +149,38 @@
             }
         }
     }
-    .jobs {
-        .pill {
-            li {
-                display: inline-block;
-                margin: 0 5px 5px 0;
-                padding: 0 0.5em;
-                border-radius: 1rem;
-                background-color: $accent;
-                font-size: 0.8rem;
-                color: $white;
-                &:hover {
-                    @include userselect;
-                    background-color: $primary
-                }
+    .pill {
+        li {
+            display: inline-block;
+            margin: 0 5px 5px 0;
+            padding: 0 0.5em;
+            border-radius: 1rem;
+            background-color: $accent;
+            font-size: 0.8rem;
+            color: $white;
+            &:hover {
+                @include userselect;
+                background-color: $primary
             }
         }
     }
-    .tiers, .set-effect {
-        .accordion {
-            border-radius: 0;
-            .v-expansion-panel {
-                border: 1px solid $bordercolor;
-            }
-            .v-expansion-panel-header__icon {
-                margin-left: auto;
-            }
-            .v-expansion-panel-header--active {
-                border-bottom: 1px solid $bordercolor;
-                min-height: 48px;
-            }
-            .v-expansion-panel-content__wrap {
-                padding: 10px 24px 16px;
-            }
+    .accordion {
+        border-radius: 0;
+        .v-expansion-panel {
+            border: 1px solid $bordercolor;
+        }
+        .v-expansion-panel-header__icon {
+            margin-left: auto;
+        }
+        .v-expansion-panel-header--active {
+            border-bottom: 1px solid $bordercolor;
+            min-height: 48px;
+        }
+        .v-expansion-panel-content__wrap {
+            padding: 10px 24px 16px;
         }
     }
 
-    .attr {
-        overflow: hidden;
-        position: relative;
-        margin-top: 10px;
-        border: 1px solid $bordercolor;
-        border-radius: 5px;
-        dl {
-            overflow: hidden;
-            position: relative;
-            float: left;
-            width: 100%;
-            padding: 7px 0;
-            border-top: 1px solid $bordercolor;
-            &:first-child {
-                border-top: none;
-            }
-        }
-        dt {
-            float: left;
-            width: 10em;
-            text-indent: 10px;
-        }
-        dd {
-            overflow: hidden;
-            color: $secondary;
-            &.single-row {
-                display: flex;
-                align-items: center;
-            }
-        }
-        .full {
-            float: none;
-            width: auto;
-        }
-        .single-row {
-            font-size: 0.8em;
-            .image-container {
-                float: left;
-                width: 60px;
-            }
-            .image {
-                margin-right: 5px;
-                width: 27px !important;
-                height: 27px !important;
-                @include imagecontainer;
-                border: 1px solid #abd2f3;
-            }
-            img {
-                border: 1px solid $white !important;
-                width: 25px !important;
-                height: 25px !important;
-               @include imagecontainer_img;
-               padding: 2px;
-            }
-        }
-    }
     .dropped {
         .monsters {
             padding: 0;

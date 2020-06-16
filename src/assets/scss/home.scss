@@ -12,6 +12,10 @@ $backgroundcolor: #f2f2f2;
 $accent: #E08A1E;
 $linkcolor: #4D8FAC;
 $bordercolor: #e8ebf7;
+$cardviolet: #8377b5;
+$cardblue: #90d9ed;
+$cardgreen: #c0e76c;
+$cardwhite: #adb8c1;
 
 @import './mixins.scss';
 
@@ -104,6 +108,8 @@ a {
 	&__item-content{ 
 		display: flex;
         flex-direction: column;
+        font-size: 0.9em;
+        text-transform: uppercase;
     }
     span {
         font-size: 13px;
@@ -255,3 +261,9 @@ a {
 @import './monster.scss';
 @import './equipments.scss';
 @import './equipment.scss';
+@import './cards.scss';
+@import './card.scss';
+@import './headwears.scss';
+@import './headwear.scss';
+@import './furnitures.scss';
+@import './furniture.scss';

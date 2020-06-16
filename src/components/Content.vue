@@ -1,6 +1,6 @@
 <template>
     <div class="content">
-        <div class="card shadow border-0 mb-3">
+        <div class="card_ shadow border-0 mb-3">
             <div class="card-body">
                 <div class="row">
                     <div class="monsters row no-gutters" @click="$router.push('monster/1')">
@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div>
-        <div class="card shadow border-0 mb-3">
+        <div class="card_ shadow border-0 mb-3">
             <div class="card-body">
                 <div class="row">
                     <div class="monsters row no-gutters" @click="$router.push('monster/1')">
