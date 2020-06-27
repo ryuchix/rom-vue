@@ -14,7 +14,7 @@
                         </div>
                         <div class="item-title-info">
                             <div class="type">
-                                {{ equipment.type_name }} - {{ equipment.type_name == 'Blueprint' ? equipment.stat_type : '' }}
+                                {{ equipment.type_name }} {{ equipment.type_name == '- Blueprint' ? equipment.stat_type : '' }}
                             </div>
                         </div>
                         <div class="item-tags">
@@ -72,7 +72,7 @@
                         <img :src="equipment.item_from['icon']" :alt="equipment.item_from['name_en']">
                       </div>
                       <router-link :to="{ name: 'headwear', params: { id: equipment.item_from['id'] }}"> {{ equipment.item_from['name_en'] }} </router-link>
-                      </dd>
+                    </dd>
                 </dl>
                 <dl v-if="equipment.compose_output_id != null && equipment.item_to != null">
                     <dt>Upgradable to</dt>
@@ -150,9 +150,66 @@
               <div class="tiers">
                 <v-expansion-panels accordion class="accordion" flat="flat">
                   <v-expansion-panel>
-                    <v-expansion-panel-header>LUK +1, Def +13</v-expansion-panel-header>
+                    <v-expansion-panel-header>
+                      <div class="attr" style="border: 0; margin-top: 0px;">
+                      <dl>
+                        <dd class="single-row" style="padding-left: 10px; font-size: 1em;">
+                          <div class="image">
+                            <img :src="equipment.item_from['icon']" :alt="equipment.item_from['name_en']">
+                          </div>
+                          {{ equipment.compose[0]['item_output'] }}
+                        </dd>
+                      </dl>
+                      </div>
+                      </v-expansion-panel-header>
                     <v-expansion-panel-content>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      <div class="tier_materials">
+                        <dl v-for="material in equipment.compose[0]['materials']" :key="material.id">
+                            <dt>
+                                <div class="item-info">
+                                    <div class="image is-24x24">
+                                        <img :src="material['item_id'] != null ? material['item_id']['icon'] : '' " :alt="material['item_id'] != null ? material['item_id']['name'] : ''">
+                                    </div>
+                                  <router-link v-if="material['item_id']['type'] == 'items'" :to="{ name: 'item', params: { id: material['item_id']['id'] }}" style="line-height: 1.2em; display: flex;">
+                                    <div @click="openItem(material['item_id']['id'])" class="item-name">
+                                        {{ material['item_id'] != null ? material['item_id']['name_en'] : '' }} x {{ material['qty'] }}
+                                    </div>
+                                  </router-link>
+                                  
+                                  <router-link v-if="material['item_id']['type'] == 'equips'" :to="{ name: 'equipment', params: { id: material['item_id']['id'] }}" style="line-height: 1.2em; display: flex;">
+                                    <div @click="$router.push({ name: 'equipment', params: { id: material['item_id']['id'] }})" class="item-name" v-if="material['item_id'] != null && material['item_id']['name_en'] != 'Zeny'">
+                                        {{ material['item_id'] != null ? material['item_id']['name_en'] : '' }} x {{ material['qty'] }}
+                                    </div>
+                                    <div @click="$router.push({ name: 'equipment', params: { id: material['item_id']['id'] }})" class="item-name" v-else>
+                                        {{ material['item_id'] != null ? formatNumber(material['qty']) + ' ' + material['item_id']['name_en'] : '' }}
+                                    </div>
+                                  </router-link>
+                                  <router-link v-if="material['item_id']['type'] == 'cards'" :to="{ name: 'card', params: { id: material['item_id']['id'] }}" style="line-height: 1.2em; display: flex;">
+                                    <div @click="$router.push({ name: 'card', params: { id: material['item_id']['id'] }})" class="item-name" v-if="material['item_id'] != null && material['item_id']['name_en'] != 'Zeny'">
+                                        {{ material['item_id'] != null ? material['item_id']['name_en'] : '' }} x {{ material['qty'] }}
+                                    </div>
+                                    <div @click="$router.push({ name: 'card', params: { id: material['item_id']['id'] }})" class="item-name" v-else>
+                                        {{ material['item_id'] != null ? formatNumber(material['qty']) + ' ' + material['item_id']['name_en'] : '' }}
+                                    </div>
+                                  </router-link>
+                                </div>
+                            </dt>
+                        </dl>
+                          <dl>
+                            <dt>
+                                <div class="item-info">
+                                    <div class="image is-24x24">
+                                        <img src="https://api.ragnarokmobile.net/uploads/items/100_img.png" alt="Zeny">
+                                    </div>
+                                  <router-link :to="{ name: 'item', params: { id: 5 }}" style="line-height: 1.2em; display: flex;">
+                                    <div @click="openItem(5)" class="item-name">
+                                        {{ formatNumber(equipment.compose[0]['cost']) }} Zeny
+                                    </div>
+                                  </router-link>
+                                </div>
+                            </dt>
+                        </dl>
+                      </div>
                     </v-expansion-panel-content>
                   </v-expansion-panel>
 
@@ -189,6 +246,13 @@ export default {
       axios
         .get(constant.getItem+this.id)
         .then(response => (this.equipment = response.data))
+        .catch(error => this.$router.replace({name: 'error'}))
+        .finally(() => this.loading = false)
+    },
+    openItem(id) {
+      axios
+        .get(constant.getItem+id)
+        .then(response => (this.equipment = response.data, this.id = this.equipment.id))
         .catch(error => this.$router.replace({name: 'error'}))
         .finally(() => this.loading = false)
     },

@@ -177,10 +177,10 @@
                                         </div>
                                       </router-link>
                                       <router-link v-if="material['tier_item_id']['type'] == 'equips'" :to="{ name: 'equipment', params: { id: material['tier_item_id']['id'] }}" style="line-height: 1.2em; display: flex;">
-                                        <div @click="$router.push({ name: 'equipment', params: { id: material['tier_item_id']['id'] }})" class="item-name" v-if="material['tier_item_id'] != null && material['tier_item_id']['name_en'] != 'Zeny'">
+                                        <div @click="openItem(material['tier_item_id']['id'])" class="item-name" v-if="material['tier_item_id'] != null && material['tier_item_id']['name_en'] != 'Zeny'">
                                             {{ material['tier_item_id'] != null ? material['tier_item_id']['name_en'] : '' }} x {{ material['qty'] }}
                                         </div>
-                                        <div @click="$router.push({ name: 'equipment', params: { id: material['tier_item_id']['id'] }})" class="item-name" v-else>
+                                        <div @click="openItem(material['tier_item_id']['id'])" class="item-name" v-else>
                                             {{ material['tier_item_id'] != null ? formatNumber(material['qty']) + ' ' + material['tier_item_id']['name_en'] : '' }}
                                         </div>
                                       </router-link>
