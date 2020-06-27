@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Monsters from '../views/Default.vue'
+import Monsters from '../views/Monsters.vue'
 import Monster from '../views/Monster.vue'
 import Equipment from '../views/Equipment.vue'
 import Equipments from '../views/Equipments.vue'
@@ -10,6 +10,9 @@ import Headwear from '../views/Headwear.vue'
 import Headwears from '../views/Headwears.vue'
 import Furniture from '../views/Furniture.vue'
 import Furnitures from '../views/Furnitures.vue'
+import Foods from '../views/Foods.vue'
+import Item from '../views/Item.vue'
+import Error from '../components/Error.vue'
 
 Vue.use(VueRouter)
 
@@ -18,6 +21,11 @@ Vue.use(VueRouter)
     path: '/',
     name: 'home',
     component: Monsters
+  },
+  {
+    path: '/item/:id',
+    name: 'item',
+    component: Item
   },
   {
     path: '/monsters',
@@ -70,6 +78,16 @@ Vue.use(VueRouter)
     component: Furniture
   },
   {
+    path: '/foods',
+    name: 'foods',
+    component: Foods
+  },
+  {
+    path: '/error',
+    name: 'error',
+    component: Error
+  },
+  {
     path: '/about',
     name: 'About',
     // route level code-splitting
@@ -84,5 +102,6 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
 
 export default router

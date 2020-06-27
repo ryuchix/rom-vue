@@ -10,7 +10,7 @@
             width: 60px;
         }
         .image {
-            @include imagecontainer;
+            @include imagecontainer;           
             &.mvp {
                 &:after {
                     background: url('assets/images/monster-icon-min.png') 0;
@@ -72,6 +72,7 @@
         }
         img {
            @include imagecontainer_img;
+           padding: 0px;
         }
         .item-title {
             text-transform: capitalize;

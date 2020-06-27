@@ -7,28 +7,28 @@
           <span>home</span>
         </div>		
       </div>
-      <div class="mobile-bottom-nav__item" @click="$router.push({name: 'monsters'})">		
+      <div class="mobile-bottom-nav__item" @click="$router.push({name: 'monsters'}).catch(err => {})">		
         <div class="mobile-bottom-nav__item-content">
           <i class="material-icons">mail</i>
           <span>monster</span>
         </div>
       </div>
-      <div class="mobile-bottom-nav__item" @click="$router.push({name: 'equipments'})">
+      <div class="mobile-bottom-nav__item" @click="$router.push({name: 'equipments'}).catch(err => {})">
         <div class="mobile-bottom-nav__item-content">
           <i class="material-icons">person</i>
           EQUIPMENT
         </div>		
       </div>
-      <div class="mobile-bottom-nav__item" @click="$router.push({name: 'furnitures'})">
+      <div class="mobile-bottom-nav__item" @click="$router.push({name: 'furnitures'}).catch(err => {})">
         <div class="mobile-bottom-nav__item-content">
           <i class="material-icons">phone</i>
           Furnitures
         </div>		
       </div>
-      <div class="mobile-bottom-nav__item" @click="$router.push({name: 'headwears'})">
+      <div class="mobile-bottom-nav__item" @click="$router.push({name: 'foods'}).catch(err => {})">
         <div class="mobile-bottom-nav__item-content">
           <i class="material-icons">settings</i>
-          Headwear
+          Food
         </div>		
       </div>
     </nav>

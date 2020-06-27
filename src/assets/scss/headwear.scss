@@ -19,7 +19,7 @@
          width: 70px;
          height: 70px;
          padding: 0px;
-         border: 0px solid #fff;
+         border: 1px solid #fff;
       }
       .item-title {
           text-transform: capitalize;
@@ -123,6 +123,70 @@
           }
       }
   }
+
+  .attr {
+    overflow: hidden;
+    position: relative;
+    margin-top: 10px;
+    border: 1px solid $bordercolor;
+    border-radius: 5px;
+    dl {
+        overflow: hidden;
+        position: relative;
+        float: left;
+        width: 100%;
+        padding: 7px 0;
+        border-top: 1px solid $bordercolor;
+        &:first-child {
+            border-top: none;
+        }
+    }
+    dt {
+        float: left;
+        width: 10em;
+        text-indent: 10px;
+    }
+    dd {
+        overflow: hidden;
+        color: $secondary;
+        &.single-row {
+            display: flex;
+            align-items: center;
+        }
+    }
+    .full {
+        float: none;
+        width: auto;
+    }
+    .single-row {
+        font-size: 0.8em;
+        .image-container {
+            float: left;
+            width: 60px;
+        }
+        .image {
+            margin-right: 5px;
+            width: 27px !important;
+            height: 28px !important;
+            @include imagecontainer;
+            border: 1px solid #abd2f3;
+
+            &.blueprint {
+                background: url('assets/images/blueprint.png');
+                background-repeat: no-repeat;
+                border: 1px solid #c6a460;
+                background-size: cover;
+            }
+        }
+        img {
+            border: 1px solid $white !important;
+            width: 25px !important;
+            height: 26px !important;
+           @include imagecontainer_img;
+           padding: 2px;
+        }
+    }
+}
 
   .sub-heading {
       width: 100%;

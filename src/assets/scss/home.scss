@@ -51,25 +51,29 @@ a {
     text-decoration: none;
     display: inline-block;
     position: relative;
-    &:after {    
-        background: none repeat scroll 0 0 transparent;
-        bottom: 0;
-        content: "";
-        display: block;
-        height: 1px;
-        left: 50%;
-        position: absolute;
-        background: $linkcolor;
+    &:hover {
+        color: $primary;
         transition: width 0.3s ease 0s, left 0.3s ease 0s;
-        width: 0;
-    }
-    &:hover:after { 
-        width: 100%; 
-        left: 0; 
     }
 }
 
 
+#error {
+    display: flex;
+    height: 80vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    p {
+        @include defaultfont;
+        color: $primary;
+    }
+
+    img {
+      width: 150px;
+    }
+}
 
 // footer
 .mobile-bottom-nav {
@@ -257,6 +261,14 @@ a {
     zoom: 1;
 }
 
+.vld-overlay {
+    bottom: 60px !important;
+    top: 50px !important;
+    .vld-background {
+        opacity: 1 !important;
+    }
+}
+
 @import './monsters.scss';
 @import './monster.scss';
 @import './equipments.scss';
@@ -267,3 +279,4 @@ a {
 @import './headwear.scss';
 @import './furnitures.scss';
 @import './furniture.scss';
+@import './foods.scss';

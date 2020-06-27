@@ -3,6 +3,10 @@ import Vue from 'vue';
 import Vuetify from 'vuetify/lib';
 
 Vue.use(Vuetify);
+import VueMeta from 'vue-meta'
+Vue.use(VueMeta, {
+  refreshOnceOnNavigation: true
+})
 
 export default new Vuetify({
     icons: {

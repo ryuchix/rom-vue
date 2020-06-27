@@ -86,6 +86,7 @@
         }
         img {
            @include imagecontainer_img;
+           padding: 0px;
         }
         .monster-info {
             align-self: center;
