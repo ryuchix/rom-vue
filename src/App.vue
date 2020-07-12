@@ -1,10 +1,14 @@
 <template>
-    <div>
+    <div id="app" style="margin: 0 auto; background-color: #fafafa">
+    <v-app id="inspire" width="640">
       <HeaderBar></HeaderBar>
-      <v-fade-transition mode="out-in">
-        <router-view />
-    </v-fade-transition>
-    <FooterBar></FooterBar>
+        <v-fade-transition mode="out-in">
+          <keep-alive>
+          <router-view style="background-color:#fafafa; " />
+          </keep-alive>
+      </v-fade-transition>
+      <FooterBar></FooterBar>
+      </v-app>
     </div>
 </template>
 
@@ -22,8 +26,34 @@ export default {
   },
 
   data: () => ({
-    //
+    onLine: navigator.onLine,
   }),
+  methods: {
+    // updateOnlineStatus(e) {
+    //     const {
+    //         type
+    //     } = e;
+    //     this.onLine = type === 'online';
+    // }
+  },
+  watch: {
+      // onLine(v) {
+      //     if (v) {
+      //         this.showBackOnline = true;
+      //         setTimeout(() => {
+      //             this.showBackOnline = false;
+      //         }, 1000);
+      //     }
+      // }
+  },
+  mounted() {
+      // window.addEventListener('online', this.updateOnlineStatus);
+      // window.addEventListener('offline', this.updateOnlineStatus);
+  },
+  beforeDestroy() {
+      // window.removeEventListener('online', this.updateOnlineStatus);
+      // window.removeEventListener('offline', this.updateOnlineStatus);
+  }
 };
 </script>
 <style lang="scss">

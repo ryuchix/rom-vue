@@ -1,10 +1,10 @@
 export const constant = {
   url: 'https://api.ragnarokmobile.net/',
-  getMonsters: 'https://api.ragnarokmobile.net/api/monsters',
-  getMonster: 'https://api.ragnarokmobile.net/api/monster/',
+  getMonsters: 'http://127.0.0.1:8000/api/monsters',
+  getMonster: 'http://127.0.0.1:8000/api/monster/',
   
-  getEquipments: 'https://api.ragnarokmobile.net/api/equipments',
-  getEquipment: 'https://api.ragnarokmobile.net/api/equipment/',
+  getEquipments: 'http://127.0.0.1:8000/api/equipments',
+  getEquipment: 'http://127.0.0.1:8000/api/equipment/',
 
   getItem: 'http://127.0.0.1:8000/api/item/',
   getItems: 'https://api.ragnarokmobile.net/api/items',
@@ -14,5 +14,8 @@ export const constant = {
 
   getHeawear: 'http://127.0.0.1:8000/api/headwear/',
   getHeawears: 'http://127.0.0.1:8000/api/headwears',
+
+  getBlog: 'http://127.0.0.1:8000/api/blog/',
+  getBlogs: 'http://127.0.0.1:8000/api/blogs',
   
 };

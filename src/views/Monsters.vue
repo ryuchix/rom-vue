@@ -47,6 +47,18 @@ export default {
   name: 'Monsters',
   components: {
     InfiniteLoading
+  }, 
+  metaInfo() {
+    return {
+      title: 'Ragnarok monsters, Monsters drop, Monsters location',
+      htmlAttrs: {
+        lang: "en",
+        amp: true
+      },
+      meta: [
+        { 'property': 'og:description', 'content': 'Wow', 'vmid': 'og:description'}
+      ]
+    }
   },
   data() {
     return {

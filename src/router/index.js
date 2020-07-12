@@ -13,6 +13,9 @@ import Furnitures from '../views/Furnitures.vue'
 import Foods from '../views/Foods.vue'
 import Item from '../views/Item.vue'
 import Error from '../components/Error.vue'
+import Home from '../views/Home.vue'
+import Blogs from '../views/Blogs.vue'
+import Blog from '../views/Blog.vue'
 
 Vue.use(VueRouter)
 
@@ -20,12 +23,17 @@ Vue.use(VueRouter)
   {
     path: '/',
     name: 'home',
-    component: Monsters
+    component: Home
   },
   {
-    path: '/item/:id',
-    name: 'item',
-    component: Item
+    path: '/guides',
+    name: 'guides',
+    component: Blogs
+  },
+  {
+    path: '/guide/:slug',
+    name: 'guide',
+    component: Blog
   },
   {
     path: '/monsters',
@@ -46,6 +54,11 @@ Vue.use(VueRouter)
     path: '/equipment/:id',
     name: 'equipment',
     component: Equipment
+  },
+  {
+    path: '/item/:id',
+    name: 'item',
+    component: Item
   },
   {
     path: '/cards',

@@ -230,6 +230,18 @@ export default {
   components: {
     //
   },
+  metaInfo() {
+    return {
+      title: this.equipment.name_en + ' | ' + this.equipment.name_en + ' drop rate | ' + this.equipment.name_en + ' exchange price',
+      htmlAttrs: {
+        lang: "en",
+        amp: true
+      },
+      meta: [
+        { 'property': 'og:description', 'content': 'Wow', 'vmid': 'og:description'}
+      ]
+    }
+  },
   data() {
     return {
         id: this.$route.params.id,

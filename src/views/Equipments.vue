@@ -1,16 +1,16 @@
 <template>
     <div class="content" v-if="!loading">
          <div class="equipments" v-for="equipment in equipments" :key="equipment.id">
-           <router-link :to="{ name: 'equipment', params: { id: equipment.id }}" >
+           <router-link :to="{ name: 'equipment', params: { id: equipment.slug }}" >
             <div class="equipment-details clearfix">
-                <div class="image" @click="$router.push('equipment/'+equipment.id)">
+                <div class="image" @click="$router.push('equipment/'+equipment.slug)">
                     <img :src="equipment.icon" :alt="equipment.name_en">
                 </div>
             </div>
             </router-link>
             <div class="equipment-info">
-              <router-link :to="{ name: 'equipment', params: { id: equipment.id }}" >
-                <div class="equipment-name" @click="$router.push('equipment/'+equipment.id)">{{ equipment.name_en }}</div>
+              <router-link :to="{ name: 'equipment', params: { id: equipment.slug }}" >
+                <div class="equipment-name" @click="$router.push('equipment/'+equipment.slug)">{{ equipment.name_en }}</div>
                 </router-link>
                 <div class="equipment-attr">
                     <div class="equipment-type_">
@@ -42,6 +42,18 @@ export default {
   name: 'Equipments',
   components: {
     InfiniteLoading
+  },  
+  metaInfo() {
+    return {
+      title: 'Equipments | How to get, craft equipments',
+      htmlAttrs: {
+        lang: "en",
+        amp: true
+      },
+      meta: [
+        { 'property': 'og:description', 'content': 'Wow', 'vmid': 'og:description'}
+      ]
+    }
   },
   data() {
     return {

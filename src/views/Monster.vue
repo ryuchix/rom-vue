@@ -183,6 +183,18 @@ export default {
   components: {
     //
   },
+  metaInfo() {
+    return {
+      title: this.monster.name_en + ' | ' + this.monster.name_en + ' location | ' + this.monster.name_en + ' drops',
+      htmlAttrs: {
+        lang: "en",
+        amp: true
+      },
+      meta: [
+        { 'property': 'og:description', 'content': 'Wow', 'vmid': 'og:description'}
+      ]
+    }
+  },
   data() {
     return {
         id: this.$route.params.id,

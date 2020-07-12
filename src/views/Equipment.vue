@@ -1,5 +1,4 @@
 <template>
-  <div>    
     <div class="content" v-if="!loading">
         <div class="single equipment">
             <div class="single-row">
@@ -63,7 +62,7 @@
                     <div class="image">
                       <img :src="equipment.before['icon']" :alt="equipment.before['name_en']">
                     </div>
-                    <router-link :to="{ name: 'equipment', params: { id: equipment.before['id'] }}"><div @click="openItem(equipment.before['id'])">{{ equipment.before['name_en'] }}</div></router-link></dd>
+                    <router-link :to="{ name: 'equipment', params: { id: equipment.before['slug'] }}"><div @click="openItem(equipment.before['slug'])">{{ equipment.before['name_en'] }}</div></router-link></dd>
               </dl>
               <dl v-if="equipment.after != null && equipment.after['id'] != equipment.id">
                   <dt>Upgradable to</dt>
@@ -71,7 +70,7 @@
                     <div class="image">
                       <img :src="equipment.after['icon']" :alt="equipment.after['name_en']">
                     </div>
-                    <router-link :to="{ name: 'equipment', params: { id: equipment.after['id'] }}"><div @click="openItem(equipment.after['id'])">{{ equipment.after['name_en'] }}</div></router-link></dd>
+                    <router-link :to="{ name: 'equipment', params: { id: equipment.after['slug'] }}"><div @click="openItem(equipment.after['slug'])">{{ equipment.after['name_en'] }}</div></router-link></dd>
               </dl>
               </div>
 
@@ -103,7 +102,7 @@
                 </div>
               </div>
             </div>
-            <div v-if="equipment['jobs'] != null">
+            <div v-if="equipment['jobs'] != null && equipment['jobs'].length">
               <div class="sub-heading clear">
                   <h3>Jobs</h3>
               </div>
@@ -130,8 +129,8 @@
                                   <div class="image is-24x24">
                                       <img :src="item['icon'] != null ? item['icon'] : '' " :alt="item['name_en'] != null ? item['name_en'] : ''">
                                   </div>
-                                  <router-link :to="{ name: 'equipment', params: { id: item.id }}" style="line-height: 1.2em; display: flex;">
-                                      <div class="item-name" @click="openItem(item.id)">
+                                  <router-link :to="{ name: 'equipment', params: { id: item.slug }}" style="line-height: 1.2em; display: flex;">
+                                      <div class="item-name" @click="openItem(item.slug)">
                                           {{ item['name_en'] }}
                                       </div>
                                   </router-link>
@@ -163,32 +162,32 @@
                       <v-expansion-panel-content>
                         <div class="tier_materials">
                             <dl v-for="material in tier['materials']" :key="material.id">
-                                <dt>
+                                <dt v-if="material.tier_item_id != null">
                                     <div class="item-info">
                                         <div class="image is-24x24">
                                             <img :src="material['tier_item_id'] != null ? material['tier_item_id']['icon'] : '' " :alt="material['tier_item_id'] != null ? material['tier_item_id']['name'] : ''">
                                         </div>
-                                      <router-link v-if="material['tier_item_id']['type'] == 'items'" :to="{ name: 'item', params: { id: material['tier_item_id']['id'] }}" style="line-height: 1.2em; display: flex;">
-                                        <div @click="$router.push({ name: 'item', params: { id: material['tier_item_id']['id'] }})" class="item-name" v-if="material['tier_item_id'] != null && material['tier_item_id']['name_en'] != 'Zeny'">
+                                      <router-link v-if="material['tier_item_id']['type'] == 'items'" :to="{ name: 'item', params: { id: material['tier_item_id']['slug'] }}" style="line-height: 1.2em; display: flex;">
+                                        <div @click="$router.push({ name: 'item', params: { id: material['tier_item_id']['slug'] }})" class="item-name" v-if="material['tier_item_id'] != null && material['tier_item_id']['name_en'] != 'Zeny'">
                                             {{ material['tier_item_id'] != null ? material['tier_item_id']['name_en'] : '' }} x {{ material['qty'] }}
                                         </div>
-                                        <div @click="$router.push({ name: 'item', params: { id: material['tier_item_id']['id'] }})" class="item-name" v-else>
+                                        <div @click="$router.push({ name: 'item', params: { id: material['tier_item_id']['slug'] }})" class="item-name" v-else>
                                             {{ material['tier_item_id'] != null ? formatNumber(material['qty']) + ' ' + material['tier_item_id']['name_en'] : '' }}
                                         </div>
                                       </router-link>
-                                      <router-link v-if="material['tier_item_id']['type'] == 'equips'" :to="{ name: 'equipment', params: { id: material['tier_item_id']['id'] }}" style="line-height: 1.2em; display: flex;">
-                                        <div @click="openItem(material['tier_item_id']['id'])" class="item-name" v-if="material['tier_item_id'] != null && material['tier_item_id']['name_en'] != 'Zeny'">
+                                      <router-link v-if="material['tier_item_id']['type'] == 'equips'" :to="{ name: 'equipment', params: { id: material['tier_item_id']['slug'] }}" style="line-height: 1.2em; display: flex;">
+                                        <div @click="openItem(material['tier_item_id']['slug'])" class="item-name" v-if="material['tier_item_id'] != null && material['tier_item_id']['name_en'] != 'Zeny'">
                                             {{ material['tier_item_id'] != null ? material['tier_item_id']['name_en'] : '' }} x {{ material['qty'] }}
                                         </div>
-                                        <div @click="openItem(material['tier_item_id']['id'])" class="item-name" v-else>
+                                        <div @click="openItem(material['tier_item_id']['slug'])" class="item-name" v-else>
                                             {{ material['tier_item_id'] != null ? formatNumber(material['qty']) + ' ' + material['tier_item_id']['name_en'] : '' }}
                                         </div>
                                       </router-link>
-                                      <router-link v-if="material['tier_item_id']['type'] == 'cards'" :to="{ name: 'card', params: { id: material['tier_item_id']['id'] }}" style="line-height: 1.2em; display: flex;">
-                                        <div @click="$router.push({ name: 'card', params: { id: material['tier_item_id']['id'] }})" class="item-name" v-if="material['tier_item_id'] != null && material['tier_item_id']['name_en'] != 'Zeny'">
+                                      <router-link v-if="material['tier_item_id']['type'] == 'cards'" :to="{ name: 'card', params: { id: material['tier_item_id']['slug'] }}" style="line-height: 1.2em; display: flex;">
+                                        <div @click="$router.push({ name: 'card', params: { id: material['tier_item_id']['slug'] }})" class="item-name" v-if="material['tier_item_id'] != null && material['tier_item_id']['name_en'] != 'Zeny'">
                                             {{ material['tier_item_id'] != null ? material['tier_item_id']['name_en'] : '' }} x {{ material['qty'] }}
                                         </div>
-                                        <div @click="$router.push({ name: 'card', params: { id: material['tier_item_id']['id'] }})" class="item-name" v-else>
+                                        <div @click="$router.push({ name: 'card', params: { id: material['tier_item_id']['slug'] }})" class="item-name" v-else>
                                             {{ material['tier_item_id'] != null ? formatNumber(material['qty']) + ' ' + material['tier_item_id']['name_en'] : '' }}
                                         </div>
                                       </router-link>
@@ -202,27 +201,71 @@
                 </div>
               </div>
 
-            <!-- <div class="clear"></div>
-            <div class="sub-heading">
-                <h3>Upgrade</h3>
-            </div>
-            <div class="tiers">
-              <v-expansion-panels accordion class="accordion" flat="flat">
-                <v-expansion-panel>
-                  <v-expansion-panel-header>LUK +1, Def +13</v-expansion-panel-header>
-                  <v-expansion-panel-content>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  </v-expansion-panel-content>
-                </v-expansion-panel>
+            <div v-if="equipment.synth != null && equipment.synthesis_recipe == 1">
+              <div class="sub-heading clear">
+                  <h3>Synthesis</h3>
+              </div>
+              <div class="tiers">
+                <v-expansion-panels accordion class="accordion" flat="flat">
+                  <v-expansion-panel v-for="synth in equipment.synth" :key="synth.id">
+                    <v-expansion-panel-header>
+                      <div class="attr" style="border: 0; margin-top: 0px;">
+                      <dl>
+                        <dd class="single-row" style="padding-left: 10px; font-size: 1em;">
+                          <div class="image">
+                            <img :src="synth['item_output']['icon']" :alt="synth['item_output']['name_en']">
+                          </div>
+                          {{ synth['item_output']['name_en'] }}
+                        </dd>
+                      </dl>
+                      </div></v-expansion-panel-header>
+                    <v-expansion-panel-content>
+                      <div v-for="equip in synth.equipments" :key="equip.id">
+                        <div class="item-info">
+                            <div class="image is-24x24">
+                                <img :src="equip.item_id['icon'] != null ? equip.item_id['icon'] : '' " :alt="equip.item_id['name_en'] != null ? equip.item_id['name_en'] : ''">
+                            </div>
+                            <router-link :to="{ name: 'equipment', params: { id: equip.item_id['slug'] }}" style="line-height: 1.2em; display: flex;">
+                                <div class="item-name" @click="openItem(equip.item_id['slug'])">
+                                    {{ equip.item_id['name_en'] }} {{ equip.tier == '0' ? '' : convertToRoman(equip.tier) }}
+                                </div>
+                            </router-link>
+                        </div>
+                        
+                      </div>
+                      <div v-for="equip in synth.materials" :key="equip.id">
+                        <div class="item-info">
+                            <div class="image is-24x24">
+                                <img :src="equip.item_id['icon'] != null ? equip.item_id['icon'] : '' " :alt="equip.item_id['name_en'] != null ? equip.item_id['name_en'] : ''">
+                            </div>
+                            <router-link :to="{ name: 'item', params: { id: equip.item_id['slug'] }}" style="line-height: 1.2em; display: flex;">
+                                <div class="item-name" @click="$router.push({name: 'item', params: { id: equip.item_id['slug'] }})">
+                                    {{ equip.item_id['name_en'] }} x {{ equip.quantity }}
+                                </div>
+                            </router-link>
+                        </div>
+                      </div>
+                        <div class="item-info">
+                            <div class="image is-24x24">
+                                <img src="https://api.ragnarokmobile.net/uploads/items/100_img.png" alt="Zeny">
+                            </div>
+                            <router-link :to="{ name: 'item', params: { id: 'zeny' }}" style="line-height: 1.2em; display: flex;">
+                                <div class="item-name" @click="$router.push({name: 'item', params: { id: 'zeny' }})">
+                                    {{ formatNumber(synth.cost) }} Zeny
+                                </div>
+                            </router-link>
+                        </div>
+                    </v-expansion-panel-content>
+                  </v-expansion-panel>
 
-              </v-expansion-panels>
-            </div> -->
+                </v-expansion-panels>
+              </div>
+            </div>
 
 
         </div>
 
     </div>
-  </div>
 </template>
 
 <script>
@@ -230,13 +273,13 @@ import axios from 'axios'
 import { constant } from '../router/Constant';
 
 export default {
-  name: 'Home',
+  name: 'Equipment',
   components: {
     //
   },
   metaInfo() {
     return {
-      title: this.equipment.name_en,
+      title: this.equipment.name_en + ' | ' + this.equipment.name_en + ' Market Price | ' + this.equipment.name_en + ' Exchange Price',
       htmlAttrs: {
         lang: "en",
         amp: true

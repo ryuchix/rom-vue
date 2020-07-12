@@ -1,6 +1,38 @@
 <template>
   <div>
-    <nav class="mobile-bottom-nav">
+  <v-bottom-navigation
+    v-if="$route.name != 'home'"
+    fixed
+    grow>
+    <v-btn @click="$router.push({name: 'home'})">
+      <span>Home</span>
+      <img class="icon" src="../assets/images/icons/home-icon.png">
+    </v-btn>
+
+    <v-btn @click="$router.push({name: 'monsters'}).catch(err => {})">
+      <span>Monster</span>
+      <img class="icon" src="../assets/images/icons/monster-icon.png">
+    </v-btn>
+
+    <v-btn @click="$router.push({name: 'equipments'}).catch(err => {})">
+      <span>Equipment</span>
+      <img class="icon" src="../assets/images/icons/armor-icon.png">
+    </v-btn>
+
+    <v-btn @click="$router.push({name: 'cards'}).catch(err => {})">
+      <span>Card</span>
+      <img class="icon" src="../assets/images/icons/card-icon.png">
+    </v-btn>
+
+    <v-btn @click="$router.push({name: 'cards'}).catch(err => {})">
+      <span>More</span>
+      <v-icon>mdi-dots-horizontal</v-icon>
+    </v-btn>
+    
+  </v-bottom-navigation>
+
+
+    <!-- <nav class="mobile-bottom-nav">
       <div class="mobile-bottom-nav__item mobile-bottom-nav__item--active" @click="$router.push({name: 'home'})">
         <div class="mobile-bottom-nav__item-content">
           <i class="material-icons">home</i>
@@ -31,7 +63,7 @@
           Food
         </div>		
       </div>
-    </nav>
+    </nav> -->
   </div>
 </template>
 

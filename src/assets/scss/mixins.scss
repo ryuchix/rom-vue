@@ -1,6 +1,22 @@
+// colors
+$disabled: #bbbbbb;
+$white: #fafafa;
+$black: #000;
+$secondary: #666666;
+$primary: #044F67;
+$textdefault: #FF0068;
+$backgroundcolor: #f2f2f2;
+$accent: #E08A1E;
+$linkcolor: #4D8FAC;
+$bordercolor: #e8ebf7;
+$cardviolet: #8377b5;
+$cardblue: #90d9ed;
+$cardgreen: #c0e76c;
+$cardwhite: #adb8c1;
+
 // mixins
 @mixin defaultfont {
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
     font-style: normal;
     font-weight: 300;
 }
