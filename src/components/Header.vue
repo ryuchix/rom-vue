@@ -25,7 +25,7 @@
     <div id="search" class="appHeader" v-bind:class="{ show: searchHasClicked }">
       <form class="search-form" v-on-clickaway="closeSearch" v-on:submit.prevent="submitSearch">
           <div class="form-group searchbox">
-              <label for="search__">
+              <label for="search__" aria-label="Search anything">
                 <input autofocus id="search__" ref="inputSearch" name="q" type="text" class="form-control" placeholder="Search..." v-model="search"/>
               </label>
               <i class="input-icon">

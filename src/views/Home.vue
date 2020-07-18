@@ -78,21 +78,17 @@
             <h3 class="subtit">Guides</h3>
             <ul class="list_news">
               <li v-for="blog in BlogsToDisplay" :key="blog.id" class>
-                <div>
-                  <img :src="blog.image" :alt="blog.title" class="news_bnn" />
                   <div class="news_tit" v-ripple>
-                    <strong class="type">{{ blog.category }}</strong>
                     <router-link tabindex :to="{name: 'guide', params: {slug: blog.slug}}" class="d-flex pointer">
                       <span @click="$router.push({name: 'guide', params: {slug: blog.slug}})" class="tit">{{ blog.title }}</span>
                     </router-link>
                   </div>
-                </div>
               </li>
             </ul>
             <v-col class="text-center" cols="12" sm="12">
               <router-link tabindex :to="{name: 'guides'}">
                 <div class="my-2 see-more" v-ripple @click="$router.push({name: 'guides'})" tabindex>
-                  <span>See more</span>
+                  <span>Click here to see more guides</span>
                 </div>
               </router-link>
             </v-col>
@@ -121,8 +117,9 @@
             <strong>fan site</strong> dedicated to the game. Game related images and contents are copyrighted by Gravity Co. and X.D. Global Ltd.
           </p>
           <div class="socia-icons center mt-n3">
-            <a href="https://www.facebook.com/ragnarokmobile.net/" target="_blank" rel="noopener">
+            <a href="https://www.facebook.com/ragnarokmobile.net/" target="_blank" rel="noopener" aria-label="Follow and Like us on Facebook">
             <v-btn
+              aria-label="Follow and Like us on Facebook"
               color="white"
               class="white--text"
               fab
@@ -131,8 +128,9 @@
               <v-icon>mdi-facebook</v-icon>
             </v-btn>
             </a>
-            <a href="https://www.youtube.com/channel/UCMjfudA3s5DTcdVTbdBqCWQ" target="_blank" rel="noopener">
+            <a href="https://www.youtube.com/channel/UCMjfudA3s5DTcdVTbdBqCWQ" target="_blank" rel="noopener" aria-label="Subscribe to our Youtube channel">
             <v-btn
+              aria-label="Subscribe to our Youtube channel"
               color="white"
               class="white--text"
               fab
@@ -214,7 +212,7 @@ export default {
   },
   computed: {
     BlogsToDisplay: function() {
-      return this.blogs.slice(0, 4);
+      return this.blogs.slice(0, 10);
     }
   },
   methods: {
@@ -423,9 +421,8 @@ export default {
     &.list_news {
       flex-wrap: wrap;
       display: flex;
+      flex-direction: column;
       margin: 14px auto 0;
-      justify-content: center;
-      place-content: space-evenly;
       @media only screen and (max-width: 768px) {
         place-content: space-between;
       }
@@ -440,21 +437,17 @@ export default {
           height: 200px;
         }
       }
-      li:first-child {
-        margin-left: 0;
-      }
       li {
-        width: 280px;
         margin-left: 10px;
-        margin-bottom: 20px;
 
         @media only screen and (max-width: 768px) {
           margin-left: 0px;
           width: 100%;
+          margin-bottom: 12px;
         }
       }
       .news_tit {
-        display: table;
+        display: flex;
         padding: 8px 4px 0;
         .type {
           display: table-cell;
@@ -469,17 +462,13 @@ export default {
           }
         }
         .tit {
-          overflow: hidden;
-          text-overflow: ellipsis;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
           height: 30px;
           color: #0c0c0c;
-          font-size: 13px;
+          font-size: 15px;
           line-height: 15px;
-          word-wrap: break-word;
-          word-break: break-all;
+          @media only screen and (max-width: 768px) {
+            line-height: 20px;
+          }
         }
       }
     }
