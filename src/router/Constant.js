@@ -1,21 +1,23 @@
 export const constant = {
   url: 'https://api.ragnarokmobile.net/',
-  getMonsters: 'http://127.0.0.1:8000/api/monsters',
-  getMonster: 'http://127.0.0.1:8000/api/monster/',
+  getMonsters: 'https://api.ragnarokmobile.net/api/monsters',
+  getMonster: 'https://api.ragnarokmobile.net/api/monster/',
   
-  getEquipments: 'http://127.0.0.1:8000/api/equipments',
-  getEquipment: 'http://127.0.0.1:8000/api/equipment/',
+  getEquipments: 'https://api.ragnarokmobile.net/api/equipments',
+  getEquipment: 'https://api.ragnarokmobile.net/api/equipment/',
 
-  getItem: 'http://127.0.0.1:8000/api/item/',
+  getItem: 'https://api.ragnarokmobile.net/api/item/',
   getItems: 'https://api.ragnarokmobile.net/api/items',
 
   getCard: 'https://api.ragnarokmobile.net/api/card/',
   getCards: 'https://api.ragnarokmobile.net/api/cards',
 
-  getHeawear: 'http://127.0.0.1:8000/api/headwear/',
-  getHeawears: 'http://127.0.0.1:8000/api/headwears',
+  getHeadwear: 'https://api.ragnarokmobile.net/api/headwear/',
+  getHeadwears: 'https://api.ragnarokmobile.net/api/headwears',
 
-  getBlog: 'http://127.0.0.1:8000/api/blog/',
-  getBlogs: 'http://127.0.0.1:8000/api/blogs',
+  getBlog: 'https://api.ragnarokmobile.net/api/blog/',
+  getBlogs: 'https://api.ragnarokmobile.net/api/blogs',
+
+  getSearch: 'https://api.ragnarokmobile.net/api/search/'
   
 };

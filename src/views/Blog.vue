@@ -56,15 +56,32 @@ import { constant } from "../router/Constant";
 export default {
   name: "Blog",
   metaInfo() {
+    let name_ = this.blog.title;
+    let title_ = name_
+    let url_ = 'https://www.ragnarokmobile.net/guide/' + this.blog.slug
+    let keywords_ = title_ + ', ROM, ROM Exchange price, market finance, Ragnarok, online, RO, ragnarok mobile, ragnarok m, ragnarok eternal love, database, guide, job, quest, headgear quest, monster drops, item information, skill description, skill simulator, stat calculator, ragnarok tools, ragnarok mobile english'
+    let description_ = this.blog.excerpt
+
     return {
-      title:
-        "Ragnarok Guides, Quests, Events for Ragnarok Mobile: Eternal Love",
-      htmlAttrs: {
-        lang: "en",
-        amp: true
-      },
+      title: title_,
       meta: [
-        { property: "og:description", content: "Wow", vmid: "og:description" }
+        { vmid: 'description', name: 'description', content: description_ },
+        { vmid: 'keywords', name: 'keywords', content: keywords_ },
+        { property: 'og:title', content: title_ }, 
+        { property: 'og:description', content: description_ }, 
+        { property: 'og:url', content: url_ }, 
+        { vmid: 'og:image', property: 'og:image', content: this.blog.image }, 
+
+        { property: 'twitter:description', content: description_ }, 
+        { property: 'twitter:title', content: title_ }, 
+        { vmid: 'twitter:image', property: 'twitter:image', content: this.blog.image }, 
+
+        { itemprop: 'name', content: title_ },
+        { itemprop: 'description', content: description_},
+        { itemprop: 'image', content: this.blog.image }
+      ],
+      link: [
+        { rel: 'canonical', href: url_ }
       ]
     };
   },
@@ -105,6 +122,7 @@ export default {
   }
   ul {
     list-style: disc;
+    padding-left: 24px !important;
     li:last-child {
       margin-bottom: 16px;
     }

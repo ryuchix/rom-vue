@@ -3,33 +3,35 @@
       <v-app-bar v-if="$route.name != 'home'"
       fixed
       :height="50">
-      <v-btn icon @click="$router.go(-1)">
-        <v-icon >mdi-arrow-left</v-icon>
+      <v-btn icon @click="goBack" aria-label="Go back">
+        <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
       <v-toolbar-title>Ragnarok Mobile</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn icon @click.stop @click="openSearch">
+      <v-btn icon @click.stop @click="openSearch" aria-label="Open search form">
         <v-icon >mdi-magnify</v-icon>
       </v-btn>
       </v-app-bar>
       <v-app-bar v-if="$route.name == 'home'"
       fixed
       :height="50">
-      <v-toolbar-title class="left">Ragnarok Mobile</v-toolbar-title>
+      <v-toolbar-title class="left"><img width="35px" src="../assets/images/whitelogo.png" alt="Ragnarok Mobile">Ragnarok Mobile</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn icon @click.stop @click="openSearch">
+      <v-btn icon @click.stop @click="openSearch" aria-label="Open search form">
         <v-icon >mdi-magnify</v-icon>
       </v-btn>
       </v-app-bar>
     <!-- search field -->
     <div id="search" class="appHeader" v-bind:class="{ show: searchHasClicked }">
-      <form class="search-form"  v-on-clickaway="closeSearch">
+      <form class="search-form" v-on-clickaway="closeSearch" v-on:submit.prevent="submitSearch">
           <div class="form-group searchbox">
-              <input type="text" class="form-control" placeholder="Search...">
+              <label for="search__">
+                <input autofocus id="search__" ref="inputSearch" name="q" type="text" class="form-control" placeholder="Search..." v-model="search"/>
+              </label>
               <i class="input-icon">
                   <i class="material-icons">search</i>
               </i>
-              <a @click="closeSearch" href="javascript:void(0)" class="ml-1 close toggle-searchbox">
+              <a @click="closeSearch" href="javascript:void(0)" class="ml-1 close toggle-searchbox" aria-label="Close search form">
                   <i class="material-icons">close</i>
               </a>
           </div>
@@ -101,23 +103,36 @@ export default {
           { title: 'Furniture', icon: 'dashboard' },
           { title: 'About', icon: 'question_answer' },
         ],
+        search: '',
     }
   },
   methods: {
     openSearch() {
       this.searchHasClicked = true;
+      this.$refs.inputSearch.focus();
     },
     closeSearch() {
+      this.$refs.inputSearch.blur();
       this.searchHasClicked = false;
+    },
+    submitSearch() {
+      this.$router.push({name: 'search', params: {query: this.search}});
+      this.searchHasClicked = false;
+      this.search = '';
+    },
+    goBack() {
+      if (this.$route.name == 'monsters' || 
+          this.$route.name == 'guides' || 
+          this.$route.name == 'headwears' || 
+          this.$route.name == 'equipments' || 
+          this.$route.name == 'cards') {
+            this.$router.push({name: 'home'})
+          } else {
+            this.$router.go(-1)
+          }
     }
   },
 }
 </script>
 <style lang="scss">
-  .v-navigation-drawer--open {
-      // position: fixed !important;
-  }
-  .v-navigation-drawer--temporary {
-    //
-  }
 </style>

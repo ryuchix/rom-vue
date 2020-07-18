@@ -20,93 +20,136 @@
         <section class="section3 mt-5">
           <h3 class="subtit mb-3">Ragnarok Mobile Database</h3>
           <div class="row no-gutters">
-            <router-link :to="{ name: 'monsters'}" class="col col-3">
+            <router-link  tabindex :to="{ name: 'monsters'}" class="col col-3">
               <div @click="$router.push({name: 'monsters'})">
                 <div class="icons">
-                  <img class="icon" src="../assets/images/icons/monster-icon.png" />
+                  <img class="icon" src="../assets/images/icons/monster-icon.png" alt="Ragnarok Mobile Monster Icon"/>
                   <span>Monster</span>
                 </div>
               </div>
             </router-link>
-            <router-link :to="{ name: 'cards'}" class="col col-3">
+            <router-link tabindex :to="{ name: 'cards'}" class="col col-3">
               <div @click="$router.push({name: 'cards'})">
                 <div class="icons">
-                  <img class="icon" src="../assets/images/icons/card-icon.png" />
+                  <img class="icon" src="../assets/images/icons/card-icon.png" alt="Ragnarok Mobile Card Icon"/>
                   <span>Card</span>
                 </div>
               </div>
             </router-link>
-            <router-link :to="{ name: 'equipments'}" class="col col-3">
+            <router-link tabindex :to="{ name: 'equipments'}" class="col col-3">
               <div @click="$router.push({name: 'equipments'})">
                 <div class="icons">
-                  <img class="icon" src="../assets/images/icons/armor-icon.png" />
+                  <img class="icon" src="../assets/images/icons/armor-icon.png" alt="Ragnarok Mobile Equipment Icon"/>
                   <span>Equipment</span>
                 </div>
               </div>
             </router-link>
-            <router-link :to="{ name: 'headwears'}" class="col col-3">
+            <router-link tabindex :to="{ name: 'headwears'}" class="col col-3">
               <div @click="$router.push({name: 'headwears'})">
                 <div class="icons">
-                  <img class="icon" src="../assets/images/icons/headwear-icon.png" />
+                  <img class="icon" src="../assets/images/icons/headwear-icon.png" alt="Ragnarok Mobile Headwear Icon"/>
                   <span>Headwear</span>
                 </div>
               </div>
             </router-link>
-              <div class="col col-3">
+              <div class="col col-3" tabindex>
                 <div class="icons">
-                  <img class="icon" src="../assets/images/icons/pet-icon.png" />
+                  <img class="icon" src="../assets/images/icons/pet-icon.png" alt="Ragnarok Mobile Pet Icon"/>
                   <span>Pet</span>
                 </div>
               </div>
-              <div class="col col-3">
+              <div class="col col-3" tabindex>
                 <div class="icons">
-                  <img class="icon" src="../assets/images/icons/food-icon.png" />
+                  <img class="icon" src="../assets/images/icons/food-icon.png" alt="Ragnarok Mobile Food Icon"/>
                   <span>Food</span>
                 </div>
               </div>
-              <div class="col col-3">
+              <div class="col col-3" tabindex>
                 <div class="icons">
-                  <img class="icon" src="../assets/images/icons/furniture-icon.png" />
-                  <span>Food</span>
+                  <img class="icon" src="../assets/images/icons/furniture-icon.png" alt="Ragnarok Mobile Furniture Icon"/>
+                  <span>Furniture</span>
                 </div>
               </div>
           </div>
         </section>
+
         <section class="main_news section2">
           <div class="contents">
             <h3 class="subtit">Guides</h3>
             <ul class="list_news">
               <li v-for="blog in BlogsToDisplay" :key="blog.id" class>
-                <div
-                  class="pointer"
-                  @click="$router.push({name: 'guide', params: {slug: blog.slug}})"
-                >
+                <div>
                   <img :src="blog.image" :alt="blog.title" class="news_bnn" />
                   <div class="news_tit" v-ripple>
                     <strong class="type">{{ blog.category }}</strong>
-                    <span class="tit">{{ blog.title }}</span>
+                    <router-link tabindex :to="{name: 'guide', params: {slug: blog.slug}}" class="d-flex pointer">
+                      <span @click="$router.push({name: 'guide', params: {slug: blog.slug}})" class="tit">{{ blog.title }}</span>
+                    </router-link>
                   </div>
                 </div>
               </li>
             </ul>
             <v-col class="text-center" cols="12" sm="12">
-              <div class="my-2 see-more" v-ripple @click="$router.push({name: 'guides'})">
-                <span>See more</span>
-              </div>
+              <router-link tabindex :to="{name: 'guides'}">
+                <div class="my-2 see-more" v-ripple @click="$router.push({name: 'guides'})" tabindex>
+                  <span>See more</span>
+                </div>
+              </router-link>
             </v-col>
           </div>
         </section>
+
+        <section class="appicons mt-2 mb-5">
+          <div class="apps d-flex justify-center mt-4">
+            <div class="playstore mr-3">
+              <img src="../assets/images/google-play-badge/128x128.png" alt="Download to playstore">
+            </div>
+            <div class="appstore ml-3">
+              <img src="../assets/images/app-store-badge/128x128.png" alt="Download to appstore">
+            </div>
+          </div>
+
+        </section>
+        
         <section class="footer-section">
-          <p>
+          <p class="copyright center">
+            © RagnarokMobile.net 2018 - 2020 | All Rights Reserved</p>
+          <p class="mt-n3">
             We are
             <strong>NOT</strong> affiliated with
             <strong>Ragnarok M: Eternal Love</strong>, this is a
             <strong>fan site</strong> dedicated to the game. Game related images and contents are copyrighted by Gravity Co. and X.D. Global Ltd.
           </p>
-          <div class="legal center">
-            <div v-ripple class="pointer">Privacy Policy</div>|
-            <div v-ripple class="pointer">Contact Us</div>
+          <div class="socia-icons center mt-n3">
+            <a href="https://www.facebook.com/ragnarokmobile.net/" target="_blank" rel="noopener">
+            <v-btn
+              color="white"
+              class="white--text"
+              fab
+              icon
+              small>
+              <v-icon>mdi-facebook</v-icon>
+            </v-btn>
+            </a>
+            <a href="https://www.youtube.com/channel/UCMjfudA3s5DTcdVTbdBqCWQ" target="_blank" rel="noopener">
+            <v-btn
+              color="white"
+              class="white--text"
+              fab
+              icon
+              small>
+              <v-icon>mdi-youtube</v-icon>
+            </v-btn>
+            </a>
           </div>
+          <small class="legal center">
+            <router-link :to="{ name: 'privacy'}">
+              <div v-ripple @click="$router.push({name: 'privacy'})" class="pointer">Privacy Policy</div> 
+            </router-link>|
+            <router-link :to="{ name: 'contact'}">
+              <div v-ripple @click="$router.push({name: 'contact'})" class="pointer">Contact Us</div>
+            </router-link>
+          </small>
         </section>
       </div>
     </v-app>
@@ -118,14 +161,29 @@ import axios from "axios";
 import { constant } from "../router/Constant";
 export default {
   metaInfo() {
+    let title_ = 'Ragnarok Mobile - Guide, Quest, Build and Database for Ragnarok M Eternal Love'
+    let url_ = 'https://www.ragnarokmobile.net'
+    let keywords_ = 'Ragnarok mobile, ROM, ROM Exchange price, market finance, Ragnarok, online, RO, ragnarok mobile, ragnarok m, ragnarok eternal love, database, guide, job, quest, headgear quest, monster drops, item information, skill description, skill simulator, stat calculator, ragnarok tools, ragnarok mobile english'
+    let description_ = 'Your ultimate guide for Ragnarok Mobile Eternal Love. Your source for Ragnarok M Monsters, Cards, Quests, Database, Headwears, Blueprints, Items, Market Prices, Exchange Price List and Stats and Skills calculator. ROM'
+
     return {
-      title: "Ragnarok Mobile",
-      htmlAttrs: {
-        lang: "en",
-        amp: true
-      },
+      title: title_,
       meta: [
-        { property: "og:description", content: "Wow", vmid: "og:description" }
+        { vmid: 'description', name: 'description', content: description_ },
+        { vmid: 'keywords', name: 'keywords', content: keywords_ },
+        { property: 'og:title', content: title_ }, 
+        { property: 'og:description', content: description_ }, 
+        { property: 'og:url', content: url_ }, 
+
+        { property: 'twitter:description', content: description_ }, 
+        { property: 'twitter:title', content: title_ }, 
+
+        { itemprop: 'name', content: title_ },
+        { itemprop: 'description', content: description_},
+        { itemprop: 'image', content: 'https://www.ragnarokmobile.net/img/louyang.webp' }
+      ],
+      link: [
+        { rel: 'canonical', href: url_ }
       ]
     };
   },
@@ -138,7 +196,17 @@ export default {
         "red lighten-1",
         "deep-purple accent-4"
       ],
-      blogs: []
+      blogs: [],
+      socials: [
+        {
+          icon: 'mdi-facebook',
+          color: 'white',
+        },
+        {
+          icon: 'mdi-youtube',
+          color: 'white',
+        },
+      ],
     };
   },
   mounted() {
@@ -249,6 +317,10 @@ export default {
   }
   .see-more {
     cursor: pointer;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: $primary;
   }
 }
 .section3 {
@@ -333,10 +405,12 @@ export default {
     color: $white;
     display: flex;
     place-content: center;
-    font-size: 16px;
     text-overflow: ellipsis;
     div {
       margin: 0px 10px;
+    }
+    a {
+      color: $white;
     }
   }
 }
@@ -410,5 +484,10 @@ export default {
       }
     }
   }
+}
+.copyright {
+  color: $white;
+  display: flex;
+  place-content: center;
 }
 </style>

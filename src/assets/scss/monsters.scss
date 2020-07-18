@@ -1,5 +1,6 @@
 .card_ {
     @include cardcontainer;
+    cursor: auto;
     .card-body {
         padding: 15px 15px;
         flex: 1 1 auto;

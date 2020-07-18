@@ -3,14 +3,14 @@
          <div class="equipments" v-for="equipment in equipments" :key="equipment.id">
            <router-link :to="{ name: 'equipment', params: { id: equipment.slug }}" >
             <div class="equipment-details clearfix">
-                <div class="image" @click="$router.push('equipment/'+equipment.slug)">
+                <div class="image" @click="$router.push({ name: 'equipment', params: { id: equipment.slug }})">
                     <img :src="equipment.icon" :alt="equipment.name_en">
                 </div>
             </div>
             </router-link>
             <div class="equipment-info">
               <router-link :to="{ name: 'equipment', params: { id: equipment.slug }}" >
-                <div class="equipment-name" @click="$router.push('equipment/'+equipment.slug)">{{ equipment.name_en }}</div>
+                <div class="equipment-name" @click="$router.push({ name: 'equipment', params: { id: equipment.slug }})">{{ equipment.name_en }}</div>
                 </router-link>
                 <div class="equipment-attr">
                     <div class="equipment-type_">
@@ -42,18 +42,33 @@ export default {
   name: 'Equipments',
   components: {
     InfiniteLoading
-  },  
+  },
   metaInfo() {
+    let title_ = "Ragnarok equipments database, equipments drop, item synthesis, item tiers for Ragnarok Mobile Eternal Love"
+    let url_ = 'https://www.ragnarokmobile.net/equipments'
+    let keywords_ = 'Ragnarok equipments database, equipments drop, item synthesis, item tiers, ROM, ROM Exchange price, market finance, Ragnarok, online, RO, ragnarok mobile, ragnarok m, ragnarok eternal love, database, guide, job, quest, headgear quest, monster drops, item information, skill description, skill simulator, stat calculator, ragnarok tools, ragnarok mobile english'
+    let description_ = 'Browse the Ragnarok Mobile equipments, items, weapons, armors and other gears database. Your ultimate guide for Ragnarok Mobile Eternal Love. Your source for Ragnarok M Monsters, Cards, Quests, Database, Headwears, Blueprints, Items, Market Prices, Exchange Price List and Stats and Skills calculator. ROM'
+
     return {
-      title: 'Equipments | How to get, craft equipments',
-      htmlAttrs: {
-        lang: "en",
-        amp: true
-      },
+      title: title_,
       meta: [
-        { 'property': 'og:description', 'content': 'Wow', 'vmid': 'og:description'}
+        { vmid: 'description', name: 'description', content: description_ },
+        { vmid: 'keywords', name: 'keywords', content: keywords_ },
+        { property: 'og:title', content: title_ }, 
+        { property: 'og:description', content: description_ }, 
+        { property: 'og:url', content: url_ }, 
+
+        { property: 'twitter:description', content: description_ }, 
+        { property: 'twitter:title', content: title_ }, 
+
+        { itemprop: 'name', content: title_ },
+        { itemprop: 'description', content: description_},
+        { itemprop: 'image', content: 'https://www.ragnarokmobile.net/img/louyang.webp' }
+      ],
+      link: [
+        { rel: 'canonical', href: url_ }
       ]
-    }
+    };
   },
   data() {
     return {

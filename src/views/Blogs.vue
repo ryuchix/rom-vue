@@ -41,15 +41,29 @@ export default {
     InfiniteLoading
   },
   metaInfo() {
+    let title_ = "Guides, Tips and Events for Ragnarok Mobile Eternal Love"
+    let url_ = 'https://www.ragnarokmobile.net/guides'
+    let keywords_ = title_ + ', ROM, ROM Exchange price, market finance, Ragnarok, online, RO, ragnarok mobile, ragnarok m, ragnarok eternal love, database, guide, job, quest, headgear quest, monster drops, item information, skill description, skill simulator, stat calculator, ragnarok tools, ragnarok mobile english'
+    let description_ = 'Your ultimate guide for Ragnarok Mobile Eternal Love. Your source for Ragnarok M Monsters, Cards, Quests, Database, Headwears, Blueprints, Items, Market Prices, Exchange Price List and Stats and Skills calculator. ROM'
+
     return {
-      title:
-        "Ragnarok Guides, Quests, Events for Ragnarok Mobile: Eternal Love",
-      htmlAttrs: {
-        lang: "en",
-        amp: true
-      },
+      title: title_,
       meta: [
-        { property: "og:description", content: "Wow", vmid: "og:description" }
+        { vmid: 'description', name: 'description', content: description_ },
+        { vmid: 'keywords', name: 'keywords', content: keywords_ },
+        { property: 'og:title', content: title_ }, 
+        { property: 'og:description', content: description_ }, 
+        { property: 'og:url', content: url_ }, 
+
+        { property: 'twitter:description', content: description_ }, 
+        { property: 'twitter:title', content: title_ }, 
+
+        { itemprop: 'name', content: title_ },
+        { itemprop: 'description', content: description_},
+        { itemprop: 'image', content: 'https://www.ragnarokmobile.net/img/louyang.webp' }
+      ],
+      link: [
+        { rel: 'canonical', href: url_ }
       ]
     };
   },

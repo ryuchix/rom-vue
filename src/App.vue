@@ -1,10 +1,10 @@
 <template>
     <div id="app" style="margin: 0 auto; background-color: #fafafa">
-    <v-app id="inspire" width="640">
+    <v-app width="640">
       <HeaderBar></HeaderBar>
         <v-fade-transition mode="out-in">
           <keep-alive>
-          <router-view style="background-color:#fafafa; " />
+          <router-view style="background-color:#fafafa; " :key="$route.fullPath" />
           </keep-alive>
       </v-fade-transition>
       <FooterBar></FooterBar>
@@ -19,7 +19,8 @@ export default {
   name: 'App',
   metaInfo: {
       // all titles will be injected into this template
-      titleTemplate: '%s | Ragnarok Mobile - Guide, Quest, Build and Database for Ragnarok M Eternal Love'
+      title: 'Ragnarok Mobile - Guide, Quest, Build and Database for Ragnarok M Eternal Love',
+      titleTemplate: '%s',
   },
   components: {
     FooterBar, HeaderBar

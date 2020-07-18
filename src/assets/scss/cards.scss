@@ -4,31 +4,33 @@
     padding: 10px;
     border-bottom: 1px solid $bordercolor;
     display: flex;
-    cursor: pointer;
     .card-details {
         display: inline-block;
         line-height: 10px;
         .image {
             &.white {
-                border: 2px solid $cardwhite;
+                border: 2px solid $cardwhite !important;
+                background-color: #fff !important;
             }
             &.blue {
-                border: 2px solid $cardblue;
+                border: 2px solid $cardblue !important;
             }
             &.green {
-                border: 2px solid $cardgreen;
+                border: 2px solid $cardgreen !important;
+                background-color: #fff !important;
             }
             &.violet {
-                border: 2px solid $cardviolet;
+                border: 2px solid $cardviolet !important;
             }
             @include imagecontainer;
+            background-color: #fff;
             width: 74px;
             height: 100px;
             img {
                 @include imagecontainer_img;
                 width: 70px;
                 height: 96px;
-                padding: 0px;
+                padding: 1px;
                 border: 0px solid #fff;
             }
         }
@@ -52,7 +54,7 @@
             margin-left: 6px;
             .card-type_ {
                 color: $accent;
-                font-size: .7em;
+                font-size: 0.9em;
                 font-weight: 600;
                 letter-spacing: 1px;
                 text-transform: uppercase;
@@ -60,7 +62,7 @@
             .card-type__ {
                 margin-top: 5px;
                 color: $accent;
-                font-size: .6em;
+                font-size: 0.8em;
                 font-weight: 600;
                 letter-spacing: 1px;
                 text-transform: uppercase;
@@ -70,16 +72,16 @@
             margin-left: 2px;
             margin-top: 3px;
             &.deposit {
-                font-size: 0.8em;
-                margin-top: -0.5em;
+                font-size: 0.9em;
+                margin-top: -1px;
             }
             &.unlock {
-                font-size: 0.8em;
-                margin-top: -0.5em;
+                font-size: 0.9em;
+                margin-top: -1px;
             }
             ul {
                 li {
-                    font-size: 0.8em;
+                    font-size: 0.9em;
                     line-height: 1.5em;
                     color: $black;
                     position: relative;

@@ -29,6 +29,8 @@
                 padding: 2px .9em;
                 overflow: hidden;
                 color: $primary;
+                line-height: 20px;
+                margin-bottom: 6px;
             }
         }
         .item-title-info {
@@ -299,6 +301,17 @@
             img {
                 height: 25px;
                 width: 25px;
+            }
+            &.blueprint {
+                background: url('assets/images/blueprint.png');
+                background-repeat: no-repeat;
+                border: 1px solid #c6a460;
+                background-size: cover;
+    
+                img {
+                    padding: 2px;
+                    border: 1px solid $white;
+                }
             }
         }
         .item-name {

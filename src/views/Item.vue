@@ -9,7 +9,7 @@
                 </div>
                 <div class="title-container">
                     <div class="title-container-inner">
-                        <div class="item-title">
+                        <div class="item-title mb-1">
                             <h2>{{ equipment.name_en }}</h2>
                         </div>
                         <div class="item-title-info">
@@ -71,7 +71,7 @@
                       <div class="image">
                         <img :src="equipment.item_from['icon']" :alt="equipment.item_from['name_en']">
                       </div>
-                      <router-link :to="{ name: 'headwear', params: { id: equipment.item_from['id'] }}"> {{ equipment.item_from['name_en'] }} </router-link>
+                      <router-link :to="{ name: 'headwear', params: { id: equipment.item_from['slug'] }}"> {{ equipment.item_from['name_en'] }} </router-link>
                     </dd>
                 </dl>
                 <dl v-if="equipment.compose_output_id != null && equipment.item_to != null">
@@ -80,34 +80,38 @@
                       <div class="image">
                         <img :src="equipment.item_to['icon']" alt="equipment.item_to['name_en']">
                       </div>
-                      <router-link :to="{ name: 'headwear', params: { id: equipment.item_to['id'] }}"> {{ equipment.item_to['name_en'] }} </router-link>
+                      <router-link :to="{ name: 'headwear', params: { id: equipment.item_to['slug'] }}"> {{ equipment.item_to['name_en'] }} </router-link>
                       </dd>
                 </dl>
               </div>
              </div>
 
-            <div class="sub-heading clear">
-                <h3>Dropped by</h3>
-            </div>
-            <div class="dropped">
-              <div v-for="monster in equipment.monsters" :key="monster.id" class="monsters row no-gutters">
-                  <div class="col-sm-12 col-12">
-                      <div class="monster-details" @click="$router.push({ name: 'monster', params: {id: monster.id} })">
-                          <div class="monster-image" :class="monster.star != 'star' ? monster.type : 'star'">
-                              <img :src="monster.icon" :alt="monster.name_en">
-                          </div>
-                      </div>
-                      <div class="monster-info" @click="$router.push({ name: 'monster', params: {id: monster.id} })">
-                          <div class="monster-name">{{ monster.name_en }}</div>
-                          <div class="monster-attr">
-                              <div class="monster-stats_">
-                                  {{ monster.element }}<span> · </span>
-                                  {{ monster.race }}<span> · </span>
-                                  {{ monster.size }}
-                              </div>
-                          </div>
-                      </div>
-                  </div>
+            <div v-if="equipment.monsters != null && equipment.monsters.length > 0">
+              <div class="sub-heading clear">
+                  <h3>Dropped by</h3>
+              </div>
+              <div class="dropped">
+                <div v-for="monster in equipment.monsters" :key="monster.id" class="monsters row no-gutters">
+                    <div class="col-sm-12 col-12">
+                      <router-link :to="{ name: 'monster', params: { id: monster.slug }}" class="d-flex">
+                        <div class="monster-details" @click="$router.push({ name: 'monster', params: {id: monster.slug} })">
+                            <div class="monster-image" :class="monster.star != 'star' ? monster.type : 'star'">
+                                <img :src="monster.icon" :alt="monster.name_en">
+                            </div>
+                        </div>
+                        <div class="monster-info" @click="$router.push({ name: 'monster', params: {id: monster.slug} })">
+                            <div class="monster-name">{{ monster.name_en }}</div>
+                            <div class="monster-attr">
+                                <div class="monster-stats_">
+                                    {{ monster.element }}<span> · </span>
+                                    {{ monster.race }}<span> · </span>
+                                    {{ monster.size }}
+                                </div>
+                            </div>
+                        </div>
+                      </router-link>
+                    </div>
+                </div>
               </div>
             </div>
 
@@ -167,28 +171,28 @@
                         <dl v-for="material in equipment.compose[0]['materials']" :key="material.id">
                             <dt>
                                 <div class="item-info">
-                                    <div class="image is-24x24">
+                                    <div class="image is-24x24" :class="material['item_id']['type_name'] == 'Blueprint' ? 'blueprint' : ''">
                                         <img :src="material['item_id'] != null ? material['item_id']['icon'] : '' " :alt="material['item_id'] != null ? material['item_id']['name'] : ''">
                                     </div>
-                                  <router-link v-if="material['item_id']['type'] == 'items'" :to="{ name: 'item', params: { id: material['item_id']['id'] }}" style="line-height: 1.2em; display: flex;">
-                                    <div @click="openItem(material['item_id']['id'])" class="item-name">
+                                  <router-link v-if="material['item_id']['type'] == 'items'" :to="{ name: 'item', params: { id: material['item_id']['slug'] }}" style="line-height: 1.2em; display: flex;">
+                                    <div @click="openItem(material['item_id']['slug'])" class="item-name">
                                         {{ material['item_id'] != null ? material['item_id']['name_en'] : '' }} x {{ material['qty'] }}
                                     </div>
                                   </router-link>
                                   
-                                  <router-link v-if="material['item_id']['type'] == 'equips'" :to="{ name: 'equipment', params: { id: material['item_id']['id'] }}" style="line-height: 1.2em; display: flex;">
-                                    <div @click="$router.push({ name: 'equipment', params: { id: material['item_id']['id'] }})" class="item-name" v-if="material['item_id'] != null && material['item_id']['name_en'] != 'Zeny'">
+                                  <router-link v-if="material['item_id']['type'] == 'equips'" :to="{ name: 'equipment', params: { id: material['item_id']['slug'] }}" style="line-height: 1.2em; display: flex;">
+                                    <div @click="$router.push({ name: 'equipment', params: { id: material['item_id']['slug'] }})" class="item-name" v-if="material['item_id'] != null && material['item_id']['name_en'] != 'Zeny'">
                                         {{ material['item_id'] != null ? material['item_id']['name_en'] : '' }} x {{ material['qty'] }}
                                     </div>
-                                    <div @click="$router.push({ name: 'equipment', params: { id: material['item_id']['id'] }})" class="item-name" v-else>
+                                    <div @click="$router.push({ name: 'equipment', params: { id: material['item_id']['slug'] }})" class="item-name" v-else>
                                         {{ material['item_id'] != null ? formatNumber(material['qty']) + ' ' + material['item_id']['name_en'] : '' }}
                                     </div>
                                   </router-link>
-                                  <router-link v-if="material['item_id']['type'] == 'cards'" :to="{ name: 'card', params: { id: material['item_id']['id'] }}" style="line-height: 1.2em; display: flex;">
-                                    <div @click="$router.push({ name: 'card', params: { id: material['item_id']['id'] }})" class="item-name" v-if="material['item_id'] != null && material['item_id']['name_en'] != 'Zeny'">
+                                  <router-link v-if="material['item_id']['type'] == 'cards'" :to="{ name: 'card', params: { id: material['item_id']['slug'] }}" style="line-height: 1.2em; display: flex;">
+                                    <div @click="$router.push({ name: 'card', params: { id: material['item_id']['slug'] }})" class="item-name" v-if="material['item_id'] != null && material['item_id']['name_en'] != 'Zeny'">
                                         {{ material['item_id'] != null ? material['item_id']['name_en'] : '' }} x {{ material['qty'] }}
                                     </div>
-                                    <div @click="$router.push({ name: 'card', params: { id: material['item_id']['id'] }})" class="item-name" v-else>
+                                    <div @click="$router.push({ name: 'card', params: { id: material['item_id']['slug'] }})" class="item-name" v-else>
                                         {{ material['item_id'] != null ? formatNumber(material['qty']) + ' ' + material['item_id']['name_en'] : '' }}
                                     </div>
                                   </router-link>
@@ -201,8 +205,8 @@
                                     <div class="image is-24x24">
                                         <img src="https://api.ragnarokmobile.net/uploads/items/100_img.png" alt="Zeny">
                                     </div>
-                                  <router-link :to="{ name: 'item', params: { id: 5 }}" style="line-height: 1.2em; display: flex;">
-                                    <div @click="openItem(5)" class="item-name">
+                                  <router-link :to="{ name: 'item', params: { id: 'zeny' }}" style="line-height: 1.2em; display: flex;">
+                                    <div @click="openItem('zeny')" class="item-name">
                                         {{ formatNumber(equipment.compose[0]['cost']) }} Zeny
                                     </div>
                                   </router-link>
@@ -231,16 +235,32 @@ export default {
     //
   },
   metaInfo() {
+    let name_ = this.equipment.name_en;
+    let title_ = name_ + ', ' + name_ + ' drop rate, ' + name_ + ' information and attributes, ' + name_ + ' source in Ragnarok Mobile'
+    let url_ = 'https://www.ragnarokmobile.net/item/' + this.equipment.slug
+    let keywords_ = title_ + ' ROM, ROM Exchange price, market finance, Ragnarok, online, RO, ragnarok mobile, ragnarok m, ragnarok eternal love, database, guide, job, quest, headgear quest, monster drops, item information, skill description, skill simulator, stat calculator, ragnarok tools, ragnarok mobile english'
+    let description_ = 'Get ' + name_ + ' information and attributes. Your ultimate guide for Ragnarok Mobile Eternal Love. Your source for Ragnarok M Monsters, Cards, Quests, Database, Headwears, Blueprints, Items, Market Prices, Exchange Price List and Stats and Skills calculator. ROM'
+
     return {
-      title: this.equipment.name_en + ' | ' + this.equipment.name_en + ' drop rate | ' + this.equipment.name_en + ' exchange price',
-      htmlAttrs: {
-        lang: "en",
-        amp: true
-      },
+      title: title_,
       meta: [
-        { 'property': 'og:description', 'content': 'Wow', 'vmid': 'og:description'}
+        { vmid: 'description', name: 'description', content: description_ },
+        { vmid: 'keywords', name: 'keywords', content: keywords_ },
+        { property: 'og:title', content: title_ }, 
+        { property: 'og:description', content: description_ }, 
+        { property: 'og:url', content: url_ }, 
+
+        { property: 'twitter:description', content: description_ }, 
+        { property: 'twitter:title', content: title_ }, 
+
+        { itemprop: 'name', content: title_ },
+        { itemprop: 'description', content: description_},
+        { itemprop: 'image', content: 'https://www.ragnarokmobile.net/img/louyang.webp' }
+      ],
+      link: [
+        { rel: 'canonical', href: url_ }
       ]
-    }
+    };
   },
   data() {
     return {

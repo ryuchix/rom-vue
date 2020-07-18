@@ -9,7 +9,7 @@
                 </div>
                 <div class="title-container">
                     <div class="title-container-inner">
-                        <div class="item-title">
+                        <div class="item-title mt-n1">
                             <h2>{{ equipment.name_en }}</h2>
                         </div>
                         <div class="item-title-info">
@@ -81,13 +81,15 @@
               <div class="dropped">
                 <div v-for="monster in equipment.monsters" :key="monster.id" class="monsters row no-gutters">
                     <div class="col-sm-12 col-12">
-                        <div class="monster-details" @click="$router.push({ name: 'monster', params: {id: monster.id} })">
+                      <router-link :to="{ name: 'equipment', params: { id: monster.slug }}" style="line-height: 1.2em; display: flex;">
+                        <div class="monster-details" @click="$router.push({ name: 'monster', params: {id: monster.slug} })">
                             <div class="monster-image" :class="monster.star != 'star' ? monster.type : 'star'">
                                 <img :src="monster.icon" :alt="monster.name_en">
                             </div>
                         </div>
-                        <router-link :to="{ name: 'monster', params: { id: monster.id }}">
-                          <div class="monster-info" @click="$router.push({ name: 'monster', params: {id: monster.id} })">
+                      </router-link>
+                        <router-link :to="{ name: 'monster', params: { id: monster.slug }}">
+                          <div class="monster-info" @click="$router.push({ name: 'monster', params: {id: monster.slug} })">
                               <div class="monster-name">{{ monster.name_en }}</div>
                               <div class="monster-attr">
                                   <div class="monster-stats_">
@@ -129,7 +131,12 @@
                                   <div class="image is-24x24">
                                       <img :src="item['icon'] != null ? item['icon'] : '' " :alt="item['name_en'] != null ? item['name_en'] : ''">
                                   </div>
-                                  <router-link :to="{ name: 'equipment', params: { id: item.slug }}" style="line-height: 1.2em; display: flex;">
+                                  <router-link v-if="item.type == 'equips'" :to="{ name: 'equipment', params: { id: item.slug }}" style="line-height: 1.2em; display: flex;">
+                                      <div class="item-name" @click="openItem(item.slug)">
+                                          {{ item['name_en'] }}
+                                      </div>
+                                  </router-link>
+                                  <router-link v-if="item.type == 'headwears'" :to="{ name: 'headwear', params: { id: item.slug }}" style="line-height: 1.2em; display: flex;">
                                       <div class="item-name" @click="openItem(item.slug)">
                                           {{ item['name_en'] }}
                                       </div>
@@ -278,16 +285,32 @@ export default {
     //
   },
   metaInfo() {
+    let name_ = this.equipment.name_en;
+    let title_ = name_ + ', ' + name_ + ' crafting requirements, synthesis, tiers, ' + name_ + ' information and attributes, where to get ' + name_ + ' in Ragnarok Mobile'
+    let url_ = 'https://www.ragnarokmobile.net/equipment/' + this.equipment.slug
+    let keywords_ = title_ + ', Ragnarok equipments database, equipment drop, ROM, ROM Exchange price, market finance, Ragnarok, online, RO, ragnarok mobile, ragnarok m, ragnarok eternal love, database, guide, job, quest, headgear quest, monster drops, item information, skill description, skill simulator, stat calculator, ragnarok tools, ragnarok mobile english'
+    let description_ = 'Get ' + name_ + ' information and attributes. Your ultimate guide for Ragnarok Mobile Eternal Love. Your source for Ragnarok M Monsters, Cards, Quests, Database, Headwears, Blueprints, Items, Market Prices, Exchange Price List and Stats and Skills calculator. ROM'
+
     return {
-      title: this.equipment.name_en + ' | ' + this.equipment.name_en + ' Market Price | ' + this.equipment.name_en + ' Exchange Price',
-      htmlAttrs: {
-        lang: "en",
-        amp: true
-      },
+      title: title_,
       meta: [
-        { 'property': 'og:description', 'content': 'Wow', 'vmid': 'og:description'}
+        { vmid: 'description', name: 'description', content: description_ },
+        { vmid: 'keywords', name: 'keywords', content: keywords_ },
+        { property: 'og:title', content: title_ }, 
+        { property: 'og:description', content: description_ }, 
+        { property: 'og:url', content: url_ }, 
+
+        { property: 'twitter:description', content: description_ }, 
+        { property: 'twitter:title', content: title_ }, 
+
+        { itemprop: 'name', content: title_ },
+        { itemprop: 'description', content: description_},
+        { itemprop: 'image', content: 'https://www.ragnarokmobile.net/img/louyang.webp' }
+      ],
+      link: [
+        { rel: 'canonical', href: url_ }
       ]
-    }
+    };
   },
   data() {
     return {

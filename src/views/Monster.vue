@@ -121,39 +121,41 @@
                     </dl>
                 </div>
             </div>
-            <div class="clear"></div>
-            <div class="sub-heading">
-                <h3>Drops</h3>
-            </div>
-            <div class="drops">
-              <div class="attr">
-                    <dl v-for="drop in monster.items" :key="drop.id">
-                        <dt>
-                            <div class="item-info">
-                                <div class="image is-24x24">
-                                    <img :src="drop.icon" :alt="drop.name_en">
+            <div v-if="monster.items != null && monster.items.length > 0">
+                <div class="sub-heading clear">
+                    <h3>Drops</h3>
+                </div>
+                <div class="drops">
+                <div class="attr">
+                        <dl v-for="drop in monster.items" :key="drop.id">
+                            <dt>
+                                <div class="item-info">
+                                    <div class="image is-24x24">
+                                        <img :src="drop.icon" :alt="drop.name_en" v-if="drop.type != 'cards'">
+                                        <img v-if="drop.type == 'cards'" src="../assets/images/defaultcardimg.png" :alt="drop.name_en">
+                                    </div>
+                                    <router-link class="item-info" :to="{ name: 'item', params: { id: drop.slug }}" v-if="drop.type == 'items'">
+                                        <div class="item-name" @click="$router.push({name: 'item', params: {id: drop.slug}})">
+                                        {{ drop.name_en == 'Zeny' ? formatNumber(drop['pivot'].qty) + ' Zeny' : drop.name_en }}
+                                        </div>
+                                        <span v-if="drop.name_en != 'Zeny'">&nbsp; x{{ drop['pivot'].qty }}</span>
+                                    </router-link>
+                                    <router-link class="item-name" :to="{ name: 'card', params: { id: drop.slug }}" v-if="drop.type == 'cards'">
+                                        <div class="item-name" @click="$router.push({name: 'card', params: {id: drop.slug}})">
+                                        {{ drop.name_en == 'Zeny' ? formatNumber(drop['pivot'].qty) + ' Zeny' : drop.name_en }}
+                                        </div>
+                                        <span v-if="drop.name_en != 'Zeny'">&nbsp; x{{ drop['pivot'].qty }}</span>
+                                    </router-link>
+                                    <router-link class="item-name" :to="{ name: 'equipment', params: { id: drop.slug }}" v-if="drop.type == 'equips'">
+                                        <div class="item-name" @click="$router.push({name: 'equipment', params: {id: drop.slug}})">
+                                        {{ drop.name_en == 'Zeny' ? formatNumber(drop['pivot'].qty) + ' Zeny' : drop.name_en }}
+                                        </div>
+                                        <span v-if="drop.name_en != 'Zeny'">&nbsp; x{{ drop['pivot'].qty }}</span>
+                                    </router-link>
                                 </div>
-                                <router-link class="item-info" :to="{ name: 'item', params: { id: drop.id }}" v-if="drop.type == 'items'">
-                                    <div class="item-name" @click="$router.push({name: 'item', params: {id: drop.id}})">
-                                    {{ drop.name_en == 'Zeny' ? formatNumber(drop['pivot'].qty) + ' Zeny' : drop.name_en }}
-                                    </div>
-                                    <span v-if="drop.name_en != 'Zeny'">&nbsp; x{{ drop['pivot'].qty }}</span>
-                                </router-link>
-                                <router-link class="item-name" :to="{ name: 'card', params: { id: drop.id }}" v-if="drop.type == 'cards'">
-                                    <div class="item-name" @click="$router.push({name: 'card', params: {id: drop.id}})">
-                                    {{ drop.name_en == 'Zeny' ? formatNumber(drop['pivot'].qty) + ' Zeny' : drop.name_en }}
-                                    </div>
-                                    <span v-if="drop.name_en != 'Zeny'">&nbsp; x{{ drop['pivot'].qty }}</span>
-                                </router-link>
-                                <router-link class="item-name" :to="{ name: 'equipment', params: { id: drop.id }}" v-if="drop.type == 'equips'">
-                                    <div class="item-name" @click="$router.push({name: 'equipment', params: {id: drop.id}})">
-                                    {{ drop.name_en == 'Zeny' ? formatNumber(drop['pivot'].qty) + ' Zeny' : drop.name_en }}
-                                    </div>
-                                    <span v-if="drop.name_en != 'Zeny'">&nbsp; x{{ drop['pivot'].qty }}</span>
-                                </router-link>
-                            </div>
-                        </dt>
-                    </dl>
+                            </dt>
+                        </dl>
+                    </div>
                 </div>
             </div>
             <div class="clear"></div>
@@ -184,16 +186,32 @@ export default {
     //
   },
   metaInfo() {
+    let name_ = this.monster.name_en;
+    let title_ = name_ + ', ' + name_ + ' locations, ' + name_ + ' information and attributes, ' + name_ + ' elements, size, race and drops in Ragnarok Mobile'
+    let url_ = 'https://www.ragnarokmobile.net/monster/' + this.monster.slug
+    let keywords_ = 'Ragnarok monsters database, monsters drop, monsters location, ROM, ROM Exchange price, market finance, Ragnarok, online, RO, ragnarok mobile, ragnarok m, ragnarok eternal love, database, guide, job, quest, headgear quest, monster drops, item information, skill description, skill simulator, stat calculator, ragnarok tools, ragnarok mobile english'
+    let description_ = 'Get ' + name_ + ' information and attributes. Your ultimate guide for Ragnarok Mobile Eternal Love. Your source for Ragnarok M Monsters, Cards, Quests, Database, Headwears, Blueprints, Items, Market Prices, Exchange Price List and Stats and Skills calculator. ROM'
+
     return {
-      title: this.monster.name_en + ' | ' + this.monster.name_en + ' location | ' + this.monster.name_en + ' drops',
-      htmlAttrs: {
-        lang: "en",
-        amp: true
-      },
+      title: title_,
       meta: [
-        { 'property': 'og:description', 'content': 'Wow', 'vmid': 'og:description'}
+        { vmid: 'description', name: 'description', content: description_ },
+        { vmid: 'keywords', name: 'keywords', content: keywords_ },
+        { property: 'og:title', content: title_ }, 
+        { property: 'og:description', content: description_ }, 
+        { property: 'og:url', content: url_ }, 
+
+        { property: 'twitter:description', content: description_ }, 
+        { property: 'twitter:title', content: title_ }, 
+
+        { itemprop: 'name', content: title_ },
+        { itemprop: 'description', content: description_},
+        { itemprop: 'image', content: 'https://www.ragnarokmobile.net/img/louyang.webp' }
+      ],
+      link: [
+        { rel: 'canonical', href: url_ }
       ]
-    }
+    };
   },
   data() {
     return {
@@ -203,7 +221,7 @@ export default {
         fullPage: false,
     }
   },
-  mounted () {
+  created () {
     this.getMonsters()
   },
   methods:  {
