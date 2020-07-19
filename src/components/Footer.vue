@@ -2,35 +2,35 @@
   <div id="bottom-nav">
     <v-bottom-navigation v-if="$route.name != 'home'" fixed grow>
       <router-link :to="{ name: 'home'}" class="v-btn">
-        <v-btn @click="$router.push({name: 'home'})" aria-label="Home">
+        <v-btn aria-label="Home">
           <span>Home</span>
           <img class="icon" src="../assets/images/icons/home-icon.png" alt="Home"/>
         </v-btn>
       </router-link>
 
       <router-link :to="{ name: 'monsters'}" class="v-btn">
-        <v-btn @click="$router.push({name: 'monsters'}).catch(err => {})" aria-label="Monster">
+        <v-btn aria-label="Monster">
           <span>Monster</span>
           <img class="icon" src="../assets/images/icons/monster-icon.png" alt="Monster"/>
         </v-btn>
       </router-link>
 
        <router-link :to="{ name: 'equipments'}" class="v-btn">
-        <v-btn @click="$router.push({name: 'equipments'}).catch(err => {})" aria-label="Equipment">
+        <v-btn aria-label="Equipment">
           <span>Equipment</span>
           <img class="icon" src="../assets/images/icons/armor-icon.png" alt="Equipment"/>
         </v-btn>
        </router-link>
        
       <router-link :to="{ name: 'headwears'}" class="v-btn">
-        <v-btn @click="$router.push({name: 'headwears'}).catch(err => {})" aria-label="Headwear">
+        <v-btn aria-label="Headwear">
           <span>Headwear</span>
           <img class="icon" src="../assets/images/icons/headwear-icon.png" alt="Headwear"/>
         </v-btn>
       </router-link>
        
       <router-link :to="{ name: 'cards'}" class="v-btn">
-        <v-btn @click="$router.push({name: 'cards'}).catch(err => {})" aria-label="Card">
+        <v-btn aria-label="Card">
           <span>Card</span>
           <img class="icon" src="../assets/images/icons/card-icon.png" alt="Card"/>
         </v-btn>

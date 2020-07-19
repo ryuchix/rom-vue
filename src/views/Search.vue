@@ -48,6 +48,26 @@
           </div>
         </div>
       </div>
+      <div class="equipments-container mb-3" v-if="cards.length > 0">
+        <h2>Cards</h2>
+        <div class="equipments" v-for="item in cards" :key="item.id">
+          <router-link :to="{ name: 'card', params: { id: item.slug }}">
+            <div class="equipment-details clearfix">
+              <div class="image">
+                <img src="../assets/images/defaultcardimg.png" :alt="item.name_en" />
+              </div>
+            </div>
+          </router-link>
+          <div class="equipment-info">
+            <router-link :to="{ name: 'card', params: { id: item.slug }}">
+              <div class="equipment-name">{{ item.name_en }}</div>
+            </router-link>
+            <div class="equipment-attr">
+              <div class="equipment-type_">{{ item.type_name }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="equipments-container mb-3" v-if="equipments.length > 0">
         <h2>Equipments</h2>
         <div class="equipments" v-for="equipment in equipments" :key="equipment.id">

@@ -114,4 +114,9 @@ export default {
 };
 </script>
 <style lang="scss">
+.headwears {
+  a {
+    height: fit-content;
+  }
+}
 </style>

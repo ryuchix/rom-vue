@@ -19,6 +19,8 @@ import Blog from '../views/Blog.vue'
 import Search from '../views/Search.vue'
 import Privacy from '../views/Privacy.vue'
 import Contact from '../views/Contact.vue'
+import EndlessTower from '../views/EndlessTower.vue'
+import ValhallaRuins from '../views/ValhallaRuins.vue'
 
 Vue.use(VueRouter)
 
@@ -117,6 +119,16 @@ Vue.use(VueRouter)
     path: '/contact',
     name: 'contact',
     component: Contact
+  },
+  {
+    path: '/endless-tower',
+    name: 'endless-tower',
+    component: EndlessTower
+  },
+  {
+    path: '/valhalla-ruins',
+    name: 'valhalla-ruins',
+    component: ValhallaRuins
   },
 ]
 

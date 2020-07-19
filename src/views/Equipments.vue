@@ -119,5 +119,9 @@ export default {
 }
 </script>
 <style lang="scss">
-
+  .equipments {
+    a {
+      height: fit-content;
+    }
+  }
 </style>

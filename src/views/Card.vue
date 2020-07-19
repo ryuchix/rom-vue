@@ -20,8 +20,8 @@
                             <div class="tag" :class="card.tradable ? 'enable' : 'disable'">
                                 <i aria-label="tradable" class="material-icons">{{ card.tradable ? 'check' : 'close' }}</i> Trade
                             </div>
-                            <div class="tag" :class="card.compose_recipe != 0 ? 'enable' : 'disable'">
-                                <i aria-label="craftable" class="material-icons">{{ card.compose_recipe != 0 ? 'check' : 'close' }}</i> Craft
+                            <div class="tag" :class="card.compose_recipe != 0 && card.compose.length > 0 ? 'enable' : 'disable'">
+                                <i aria-label="craftable" class="material-icons">{{ card.compose_recipe != 0  && card.compose.length > 0 ? 'check' : 'close' }}</i> Craft
                             </div>
                         </div>
                     </div>
@@ -48,13 +48,13 @@
                 {{ card.deposit_effect }}
             </div>
 
-            <div v-if="card.monsters != null">
+            <div v-if="card.monsters != null && card.monsters.length > 0">
                 <div class="sub-heading clear">
                     <h3>Dropped by</h3>
                 </div>
                 <div class="dropped">
-                <div class="monsters row no-gutters">
-                    <div class="col-sm-12 col-12" v-for="mons in card.monsters" :key="mons.id">
+                <div class="row no-gutters">
+                    <div class=" monsters col-sm-12 col-12" v-for="mons in card.monsters" :key="mons.id">
                         <div class="monster-details">
                             <div class="monster-image" :class="mons.star != 'star' ? mons.type : 'star'">
                                 <img :src="mons.icon" :alt="mons.name_en">
@@ -62,7 +62,7 @@
                         </div>
                         <div class="monster-info">
                             <router-link :to="{ name: 'monster', params: { id: mons.slug }}">
-                              <div class="monster-name pointer" @click="$router.push({ name: 'monster', params: { id: mons.slug }})">{{ mons.name_en }}</div>
+                              <div class="monster-name pointer">{{ mons.name_en }}</div>
                             </router-link>
                             <div class="monster-attr">
                                 <div class="monster-stats_">
@@ -77,7 +77,7 @@
                 </div>
             </div>
 
-          <div v-if="card.compose_recipe == 1 && card.compose != null">
+          <div v-if="card.compose_recipe == 1 && card.compose.length > 0">
             <div class="sub-heading clear">
                 <h3>Craft</h3>
             </div>
@@ -99,10 +99,16 @@
                     <div v-for="equip in synth.materials" :key="equip.id">
                       <div class="item-info">
                           <div class="image is-24x24" :class="equip.item_id['type_name'] == 'Blueprint' ? 'blueprint' : ''">
-                              <img :src="equip.item_id['icon'] != null ? equip.item_id['icon'] : '' " :alt="equip.item_id['name_en'] != null ? equip.item_id['name_en'] : ''">
+                              <img v-if="equip.item_id['type'] != 'cards'" :src="equip.item_id['icon'] != null ? equip.item_id['icon'] : '' " :alt="equip.item_id['name_en'] != null ? equip.item_id['name_en'] : ''">
+                              <img v-if="equip.item_id['type'] == 'cards'" src="../assets/images/defaultcardimg.png" :alt="equip.item_id['name_en'] != null ? equip.item_id['name_en'] : ''">
                           </div>
-                          <router-link :to="{ name: 'item', params: { id: equip.item_id['slug'] }}" style="line-height: 1.2em; display: flex;">
-                              <div class="item-name" @click="$router.push({name: 'item', params: { id: equip.item_id['slug'] }})">
+                          <router-link v-if="equip.item_id['type'] != 'cards'" :to="{ name: 'item', params: { id: equip.item_id['slug'] }}" style="line-height: 1.2em; display: flex;">
+                              <div class="item-name">
+                                  {{ equip.item_id['name_en'] }} x {{ equip.qty }}
+                              </div>
+                          </router-link>
+                          <router-link v-if="equip.item_id['type'] == 'cards'" :to="{ name: 'card', params: { id: equip.item_id['slug'] }}" style="line-height: 1.2em; display: flex;">
+                              <div class="item-name">
                                   {{ equip.item_id['name_en'] }} x {{ equip.qty }}
                               </div>
                           </router-link>
@@ -113,7 +119,7 @@
                               <img src="https://api.ragnarokmobile.net/uploads/items/100_img.png" alt="Zeny">
                           </div>
                           <router-link :to="{ name: 'item', params: { id: 'zeny' }}" style="line-height: 1.2em; display: flex;">
-                              <div class="item-name" @click="$router.push({name: 'item', params: { id: 'zeny' }})">
+                              <div class="item-name">
                                   {{ formatNumber(synth.cost) }} Zeny
                               </div>
                           </router-link>

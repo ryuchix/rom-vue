@@ -21,7 +21,7 @@
           <h3 class="subtit mb-3">Ragnarok Mobile Database</h3>
           <div class="row no-gutters">
             <router-link  tabindex :to="{ name: 'monsters'}" class="col col-3">
-              <div @click="$router.push({name: 'monsters'})">
+              <div>
                 <div class="icons">
                   <img class="icon" src="../assets/images/icons/monster-icon.png" alt="Ragnarok Mobile Monster Icon"/>
                   <span>Monster</span>
@@ -29,7 +29,7 @@
               </div>
             </router-link>
             <router-link tabindex :to="{ name: 'cards'}" class="col col-3">
-              <div @click="$router.push({name: 'cards'})">
+              <div>
                 <div class="icons">
                   <img class="icon" src="../assets/images/icons/card-icon.png" alt="Ragnarok Mobile Card Icon"/>
                   <span>Card</span>
@@ -37,7 +37,7 @@
               </div>
             </router-link>
             <router-link tabindex :to="{ name: 'equipments'}" class="col col-3">
-              <div @click="$router.push({name: 'equipments'})">
+              <div>
                 <div class="icons">
                   <img class="icon" src="../assets/images/icons/armor-icon.png" alt="Ragnarok Mobile Equipment Icon"/>
                   <span>Equipment</span>
@@ -45,7 +45,7 @@
               </div>
             </router-link>
             <router-link tabindex :to="{ name: 'headwears'}" class="col col-3">
-              <div @click="$router.push({name: 'headwears'})">
+              <div>
                 <div class="icons">
                   <img class="icon" src="../assets/images/icons/headwear-icon.png" alt="Ragnarok Mobile Headwear Icon"/>
                   <span>Headwear</span>
@@ -73,6 +73,23 @@
           </div>
         </section>
 
+        <section class="appicons mt-2 mb-5">
+          <div class="apps d-flex justify-center mt-4">
+            <router-link tabindex :to="{name: 'endless-tower'}" class="d-flex pointer playstore mr-3" v-ripple>
+              Endless Tower MVP/Mini List
+            </router-link> | 
+            <router-link tabindex :to="{name: 'valhalla-ruins'}" class="d-flex pointer appstore ml-3" v-ripple>
+              Valhalla Ruins Map
+            </router-link>  
+            <!-- <div class="playstore mr-3">
+              <img src="../assets/images/google-play-badge/128x128.png" alt="Download to playstore">
+            </div>
+            <div class="appstore ml-3">
+              <img src="../assets/images/app-store-badge/128x128.png" alt="Download to appstore">
+            </div> -->
+          </div>
+
+        </section>
         <section class="main_news section2">
           <div class="contents">
             <h3 class="subtit">Guides</h3>
@@ -95,17 +112,6 @@
           </div>
         </section>
 
-        <section class="appicons mt-2 mb-5">
-          <div class="apps d-flex justify-center mt-4">
-            <div class="playstore mr-3">
-              <img src="../assets/images/google-play-badge/128x128.png" alt="Download to playstore">
-            </div>
-            <div class="appstore ml-3">
-              <img src="../assets/images/app-store-badge/128x128.png" alt="Download to appstore">
-            </div>
-          </div>
-
-        </section>
         
         <section class="footer-section">
           <p class="copyright center">

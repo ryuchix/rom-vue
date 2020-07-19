@@ -4,8 +4,7 @@
       <div class="cards" v-for="card in cards" :key="card.id">
         <router-link :to="{ name: 'card', params: { id: card.slug }}">
           <div
-            class="card-details clearfix"
-            @click="$router.push({name: 'card', params: { id: card.slug }})">
+            class="card-details clearfix">
             <div class="image" :class="card.quality">
               <img :src="card.icon" :alt="card.name_en" />
             </div>
@@ -14,9 +13,7 @@
         <div class="card-info">
           <router-link :to="{ name: 'card', params: { id: card.slug }}">
             <div
-              class="card-name"
-              @click="$router.push({name: 'card', params: { id: card.slug }})"
-            >{{ card.name_en }}</div>
+              class="card-name">{{ card.name_en }}</div>
           </router-link>
           <div class="card-attr">
             <div class="card-type_">{{ card.type_name }}</div>

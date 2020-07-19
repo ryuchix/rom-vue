@@ -81,25 +81,25 @@
               <div class="dropped">
                 <div v-for="monster in equipment.monsters" :key="monster.id" class="monsters row no-gutters">
                     <div class="col-sm-12 col-12">
-                      <router-link :to="{ name: 'equipment', params: { id: monster.slug }}" style="line-height: 1.2em; display: flex;">
+                      <div style="line-height: 1.2em; display: flex;">
                         <div class="monster-details">
                             <div class="monster-image" :class="monster.star != 'star' ? monster.type : 'star'">
                                 <img :src="monster.icon" :alt="monster.name_en">
                             </div>
                         </div>
-                      </router-link>
-                        <router-link :to="{ name: 'monster', params: { id: monster.slug }}">
-                          <div class="monster-info">
-                              <div class="monster-name">{{ monster.name_en }}</div>
-                              <div class="monster-attr">
-                                  <div class="monster-stats_">
-                                      {{ monster.element }}<span> · </span>
-                                      {{ monster.race }}<span> · </span>
-                                      {{ monster.size }}
-                                  </div>
+                      </div>
+                      <div class="monster-info">
+                          <router-link :to="{ name: 'monster', params: { id: monster.slug }}">
+                            <div class="monster-name">{{ monster.name_en }}</div>
+                          </router-link>
+                          <div class="monster-attr">
+                              <div class="monster-stats_">
+                                  {{ monster.element }}<span> · </span>
+                                  {{ monster.race }}<span> · </span>
+                                  {{ monster.size }}
                               </div>
                           </div>
-                        </router-link>
+                      </div>
                     </div>
                 </div>
               </div>
