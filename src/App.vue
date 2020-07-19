@@ -4,7 +4,7 @@
       <HeaderBar></HeaderBar>
         <v-fade-transition mode="out-in">
           <keep-alive>
-          <router-view style="background-color:#fafafa; " :key="$route.fullPath" />
+          <router-view style="background-color:#fafafa;" :key="$route.fullPath" />
           </keep-alive>
       </v-fade-transition>
       <FooterBar></FooterBar>

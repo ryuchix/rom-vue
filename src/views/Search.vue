@@ -19,7 +19,7 @@
           <div class="d-flex">
 
           <router-link :to="{ name: 'monster', params: { id: monster.slug }}">
-            <div class="monster-details" @click="$route.push({name: 'monster', params: { id: monster.slug }})">
+            <div class="monster-details">
               <div class="monster-image pointer" :class="monster.star != 'star' ? monster.type : 'star'">
                 <img :src="monster.icon" :alt="monster.name_en" />
               </div>
@@ -27,7 +27,7 @@
           </router-link>
             <div class="monster-info">
               <router-link :to="{ name: 'monster', params: { id: monster.slug }}">
-              <div @click="$router.push({name: 'monster', params: {id: monster.slug}})" class="monster-name pointer">{{ monster.name_en }}</div>
+              <div class="monster-name pointer">{{ monster.name_en }}</div>
               </router-link>
               <div class="monster-attr">
                 <div class="monster-stats_">
@@ -53,20 +53,14 @@
         <div class="equipments" v-for="equipment in equipments" :key="equipment.id">
           <router-link :to="{ name: 'equipment', params: { id: equipment.slug }}">
             <div class="equipment-details clearfix">
-              <div
-                class="image"
-                @click="$router.push({name: 'equipment', params: {id: equipment.slug}})"
-              >
+              <div class="image">
                 <img :src="equipment.icon" :alt="equipment.name_en" />
               </div>
             </div>
           </router-link>
           <div class="equipment-info">
             <router-link :to="{ name: 'equipment', params: { id: equipment.slug }}">
-              <div
-                class="equipment-name"
-                @click="$router.push({name: 'equipment', params: {id: equipment.slug}})"
-              >{{ equipment.name_en }}</div>
+              <div class="equipment-name">{{ equipment.name_en }}</div>
             </router-link>
             <div class="equipment-attr">
               <div class="equipment-type_">{{ equipment.type_name }}</div>
@@ -79,21 +73,14 @@
         <div class="equipments" v-for="item in items" :key="item.id">
           <router-link :to="{ name: 'item', params: { id: item.slug }}">
             <div class="equipment-details clearfix">
-              <div
-                class="image"
-                :class="item.type_name == 'Blueprint' ? 'blueprint' : ''"
-                @click="$router.push({name: 'item', params: {id: equipment.slug}})"
-              >
+              <div class="image" :class="item.type_name == 'Blueprint' ? 'blueprint' : ''">
                 <img :src="item.icon" :alt="item.name_en" />
               </div>
             </div>
           </router-link>
           <div class="equipment-info">
             <router-link :to="{ name: 'item', params: { id: item.slug }}">
-              <div
-                class="equipment-name"
-                @click="$router.push({name: 'item', params: {id: item.slug}})"
-              >{{ item.name_en }}</div>
+              <div class="equipment-name">{{ item.name_en }}</div>
             </router-link>
             <div class="equipment-attr">
               <div class="equipment-type_">{{ item.type_name }}</div>
@@ -106,20 +93,14 @@
         <div class="equipments" v-for="item in headwears" :key="item.id">
           <router-link :to="{ name: 'headwear', params: { id: item.slug }}">
             <div class="equipment-details clearfix">
-              <div
-                class="image"
-                @click="$router.push({name: 'headwear', params: {id: equipment.slug}})"
-              >
+              <div class="image">
                 <img :src="item.icon" :alt="item.name_en" />
               </div>
             </div>
           </router-link>
           <div class="equipment-info">
             <router-link :to="{ name: 'headwear', params: { id: item.slug }}">
-              <div
-                class="equipment-name"
-                @click="$router.push({name: 'headwear', params: {id: item.slug}})"
-              >{{ item.name_en }}</div>
+              <div class="equipment-name">{{ item.name_en }}</div>
             </router-link>
             <div class="equipment-attr">
               <div class="equipment-type_">{{ item.type_name }}</div>
@@ -131,7 +112,7 @@
         <h2>Guides</h2>
         <div v-for="blog in blogs" :key="blog.id">
           <router-link :to="{ name: 'guide', params: { slug: blog.slug }}">
-            <div @click="$router.push({name: 'guide', params: { slug: blog.slug }})"> {{ blog.title }}</div>
+            {{ blog.title }}
           </router-link>
         </div>
       </div>

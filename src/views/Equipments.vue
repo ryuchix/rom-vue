@@ -3,14 +3,14 @@
          <div class="equipments" v-for="equipment in equipments" :key="equipment.id">
            <router-link :to="{ name: 'equipment', params: { id: equipment.slug }}" >
             <div class="equipment-details clearfix">
-                <div class="image" @click="$router.push({ name: 'equipment', params: { id: equipment.slug }})">
+                <div class="image">
                     <img :src="equipment.icon" :alt="equipment.name_en">
                 </div>
             </div>
             </router-link>
             <div class="equipment-info">
               <router-link :to="{ name: 'equipment', params: { id: equipment.slug }}" >
-                <div class="equipment-name" @click="$router.push({ name: 'equipment', params: { id: equipment.slug }})">{{ equipment.name_en }}</div>
+                <div class="equipment-name">{{ equipment.name_en }}</div>
                 </router-link>
                 <div class="equipment-attr">
                     <div class="equipment-type_">

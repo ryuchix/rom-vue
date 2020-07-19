@@ -8,14 +8,16 @@
               <h3 class="subtit">Guides</h3>
               <ul class="list_news">
                 <li v-for="blog in blogs" :key="blog.id" class="">
-                  <div class="pointer" v-ripple @click="$router.push({name: 'guide', params: {slug: blog.slug}})">
+                  <div>
                     <img
                       :src="blog.image"
                       :alt="blog.title"
                       class="news_bnn"/>
-                    <div class="news_tit">
-                      <strong class="type">{{ blog.category }}</strong>
-                      <span class="tit">{{ blog.title }}</span>
+                    <div class="news_tit" >
+                      <router-link :to="{name: 'guide', params: {slug: blog.slug}}">
+                        <strong class="type">{{ blog.category }}</strong>
+                        <span class="tit" v-ripple>{{ blog.title }}</span>
+                      </router-link>
                     </div>
                   </div>
                 </li>

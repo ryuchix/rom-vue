@@ -135,19 +135,19 @@
                                         <img v-if="drop.type == 'cards'" src="../assets/images/defaultcardimg.png" :alt="drop.name_en">
                                     </div>
                                     <router-link class="item-info" :to="{ name: 'item', params: { id: drop.slug }}" v-if="drop.type == 'items'">
-                                        <div class="item-name" @click="$router.push({name: 'item', params: {id: drop.slug}})">
+                                        <div class="item-name">
                                         {{ drop.name_en == 'Zeny' ? formatNumber(drop['pivot'].qty) + ' Zeny' : drop.name_en }}
                                         </div>
                                         <span v-if="drop.name_en != 'Zeny'">&nbsp; x{{ drop['pivot'].qty }}</span>
                                     </router-link>
                                     <router-link class="item-name" :to="{ name: 'card', params: { id: drop.slug }}" v-if="drop.type == 'cards'">
-                                        <div class="item-name" @click="$router.push({name: 'card', params: {id: drop.slug}})">
+                                        <div class="item-name">
                                         {{ drop.name_en == 'Zeny' ? formatNumber(drop['pivot'].qty) + ' Zeny' : drop.name_en }}
                                         </div>
                                         <span v-if="drop.name_en != 'Zeny'">&nbsp; x{{ drop['pivot'].qty }}</span>
                                     </router-link>
                                     <router-link class="item-name" :to="{ name: 'equipment', params: { id: drop.slug }}" v-if="drop.type == 'equips'">
-                                        <div class="item-name" @click="$router.push({name: 'equipment', params: {id: drop.slug}})">
+                                        <div class="item-name">
                                         {{ drop.name_en == 'Zeny' ? formatNumber(drop['pivot'].qty) + ' Zeny' : drop.name_en }}
                                         </div>
                                         <span v-if="drop.name_en != 'Zeny'">&nbsp; x{{ drop['pivot'].qty }}</span>

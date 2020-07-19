@@ -65,12 +65,10 @@
                 </div>
                 <router-link
                   v-if="equipment.item_from['type_name'] != 'Blueprint'"
-                  :to="{ name: 'headwear', params: { id: equipment.item_from['slug'] }}"
-                >{{ equipment.item_from['name_en'] }}</router-link>
+                  :to="{ name: 'headwear', params: { id: equipment.item_from['slug'] }}">{{ equipment.item_from['name_en'] }}</router-link>
                 <router-link
                   v-if="equipment.item_from['type_name'] == 'Blueprint'"
-                  :to="{ name: 'item', params: { id: equipment.item_from['slug'] }}"
-                >{{ equipment.item_from['name_en'] }}</router-link>
+                  :to="{ name: 'item', params: { id: equipment.item_from['slug'] }}">{{ equipment.item_from['name_en'] }}</router-link>
               </dd>
             </dl>
             <dl v-if="equipment.compose_output_id != null && equipment.item_to != null">
@@ -83,12 +81,10 @@
                 </div>
                 <router-link
                   v-if="equipment.item_to['type_name'] != 'Blueprint'"
-                  :to="{ name: 'headwear', params: { id: equipment.item_to['slug'] }}"
-                >{{ equipment.item_to['name_en'] }}</router-link>
+                  :to="{ name: 'headwear', params: { id: equipment.item_to['slug'] }}">{{ equipment.item_to['name_en'] }}</router-link>
                 <router-link
                   v-if="equipment.item_to['type_name'] == 'Blueprint'"
-                  :to="{ name: 'item', params: { id: equipment.item_to['slug'] }}"
-                >{{ equipment.item_to['name_en'] }}</router-link>
+                  :to="{ name: 'item', params: { id: equipment.item_to['slug'] }}">{{ equipment.item_to['name_en'] }}</router-link>
               </dd>
             </dl>
           </div>
@@ -129,8 +125,13 @@
                         <div class="image is-24x24" :class="equip.item_id['type_name'] == 'Blueprint' ? 'blueprint' : ''">
                             <img :src="equip.item_id['icon'] != null ? equip.item_id['icon'] : '' " :alt="equip.item_id['name_en'] != null ? equip.item_id['name_en'] : ''">
                         </div>
-                        <router-link :to="{ name: 'item', params: { id: equip.item_id['slug'] }}" style="line-height: 1.2em; display: flex;">
+                        <router-link v-if="equip.item_id['type'] != 'headwears'" :to="{ name: 'item', params: { id: equip.item_id['slug'] }}" style="line-height: 1.2em; display: flex;">
                             <div class="item-name" @click="$router.push({name: 'item', params: { id: equip.item_id['slug'] }})">
+                                {{ equip.item_id['name_en'] }} x {{ equip.qty }}
+                            </div>
+                        </router-link>
+                        <router-link v-if="equip.item_id['type'] == 'headwears'" :to="{ name: 'headwear', params: { id: equip.item_id['slug'] }}" style="line-height: 1.2em; display: flex;">
+                            <div class="item-name" @click="$router.push({name: 'headwear', params: { id: equip.item_id['slug'] }})">
                                 {{ equip.item_id['name_en'] }} x {{ equip.qty }}
                             </div>
                         </router-link>

@@ -3,7 +3,7 @@
     <div class="content" v-if="!loading">
       <div class="headwears" v-for="headwear in headwears" :key="headwear.id">
         <router-link :to="{ name: 'headwear', params: { id: headwear.slug }}">
-          <div class="card-details clearfix" @click="$router.push({ name: 'headwear', params: { id: headwear.slug }})">
+          <div class="card-details clearfix">
             <div class="image">
               <img :src="headwear.icon" :alt="headwear.name_en" />
             </div>
@@ -13,7 +13,6 @@
           <router-link :to="{ name: 'headwear', params: { id: headwear.slug }}">
             <div
               class="card-name"
-              @click="$router.push('headwear/'+headwear.slug)"
             >{{ headwear.name_en }}</div>
           </router-link>
           <div class="card-attr">
@@ -23,10 +22,14 @@
                 <li v-for="(eff, index) in headwear.stat_extra" :key="index">{{ eff }}</li>
               </ul>
             </div>
-            <div class="card-type__">Unlock</div>
-            <div class="card-stats unlock">{{ headwear.unlock_effect }}</div>
-            <div class="card-type__">Deposit</div>
-            <div class="card-stats deposit">{{ headwear.deposit_effect }}</div>
+            <div v-if="headwear.unlock_effect != null">
+              <div class="card-type__">Unlock</div>
+              <div class="card-stats unlock">{{ headwear.unlock_effect }}</div>
+            </div>
+            <div v-if="headwear.deposit_effect != null">
+              <div class="card-type__">Deposit</div>
+              <div class="card-stats deposit">{{ headwear.deposit_effect }}</div>
+            </div>
           </div>
         </div>
       </div>

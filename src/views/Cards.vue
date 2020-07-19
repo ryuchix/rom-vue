@@ -113,4 +113,9 @@ export default {
 };
 </script>
 <style lang="scss">
+.cards {
+  a {
+    height: fit-content;
+  }
+}
 </style>
