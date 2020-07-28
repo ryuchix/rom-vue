@@ -21,6 +21,7 @@ import Privacy from '../views/Privacy.vue'
 import Contact from '../views/Contact.vue'
 import EndlessTower from '../views/EndlessTower.vue'
 import ValhallaRuins from '../views/ValhallaRuins.vue'
+import Quiz from '../views/Quiz.vue'
 
 Vue.use(VueRouter)
 
@@ -129,6 +130,11 @@ Vue.use(VueRouter)
     path: '/valhalla-ruins',
     name: 'valhalla-ruins',
     component: ValhallaRuins
+  },
+  {
+    path: '/monster-quiz-in-wasteland',
+    name: 'quiz',
+    component: Quiz
   },
 ]
 

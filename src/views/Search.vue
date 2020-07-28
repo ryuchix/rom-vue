@@ -6,6 +6,7 @@
                   equipments.length == 0 && 
                   items.length == 0 && 
                   cards.length == 0 && 
+                  furnitures.length == 0 && 
                   headwears.length == 0 && 
                   blogs.length == 0 && !loading ">
           <h2>No results found!</h2>
@@ -93,7 +94,7 @@
         <div class="equipments" v-for="item in items" :key="item.id">
           <router-link :to="{ name: 'item', params: { id: item.slug }}">
             <div class="equipment-details clearfix">
-              <div class="image" :class="item.type_name == 'Blueprint' ? 'blueprint' : ''">
+              <div class="image" :class="item.type_name == 'Blueprint' ? 'blueprint' : (item.type_name == 'Furniture Blueprint' ? 'fblueprint' : '')">
                 <img :src="item.icon" :alt="item.name_en" />
               </div>
             </div>
@@ -120,6 +121,26 @@
           </router-link>
           <div class="equipment-info">
             <router-link :to="{ name: 'headwear', params: { id: item.slug }}">
+              <div class="equipment-name">{{ item.name_en }}</div>
+            </router-link>
+            <div class="equipment-attr">
+              <div class="equipment-type_">{{ item.type_name }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="equipments-container mb-3" v-if="headwears.length > 0">
+        <h2>Furnitures</h2>
+        <div class="equipments" v-for="item in furnitures" :key="item.id">
+          <router-link :to="{ name: 'furniture', params: { id: item.slug }}">
+            <div class="equipment-details clearfix">
+              <div class="image">
+                <img :src="item.icon" :alt="item.name_en" />
+              </div>
+            </div>
+          </router-link>
+          <div class="equipment-info">
+            <router-link :to="{ name: 'furniture', params: { id: item.slug }}">
               <div class="equipment-name">{{ item.name_en }}</div>
             </router-link>
             <div class="equipment-attr">
@@ -201,6 +222,7 @@ export default {
           this.blogs = response.data.blogs;
           this.monsters = response.data.monsters;
           this.headwears = response.data.headwears;
+          this.furnitures = response.data.furnitures;
         })
         .catch(error => console.log(error))
         .finally(() => (this.loading = false));
@@ -341,11 +363,15 @@ export default {
   }
   .image {
     &.blueprint {
-    background: url('../assets/images/blueprint.png');
-    background-repeat: no-repeat;
-    border: 2px solid #c6a460;
-    background-size: cover;
-}
+        background: url('../assets/images/blueprint.png');
+        background-repeat: no-repeat;
+        border: 2px solid #c6a460;
+        background-size: cover;
+    }
+    &.fblueprint {
+        background-color: #4b8ad5;
+        border: 2px solid #4b8ad5;
+    }
   }
 }
 </style>

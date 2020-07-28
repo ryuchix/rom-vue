@@ -1,7 +1,57 @@
 <template>
   <div>
     <div class="content" v-if="!loading">
-      <div class="headwears" v-for="headwear in headwears" :key="headwear.id">
+      <div class="filters d-flex flex-row justify-center justify-space-around">
+        <div class="all-elements">
+          <v-menu max-height="300" bottom offset-y :close-on-click="closeOnClick">
+            <template v-slot:activator="{ on, attrs }">
+              <span class="v-btn__content" 
+                v-bind="attrs"
+                v-on="on">Position<v-icon>mdi-menu-down</v-icon></span>
+            </template>
+            <v-list tile dense min-width="100">
+              <v-list-item link v-for="(position, index) in positions" :key="index"
+                :class="$route.query.position == position ? '_active' : ''"
+                @click="$router.push({name: 'headwears', query: query({position: position})})">
+                <v-list-item-title dense>{{ position }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </div>
+        <div class="all-races">
+          <v-menu z-index="9" max-height="300" bottom offset-y :close-on-click="closeOnClick">
+            <template v-slot:activator="{ on, attrs }">
+              <span class="v-btn__content" 
+                v-bind="attrs"
+                v-on="on">Unlock<v-icon>mdi-menu-down</v-icon></span>
+            </template>
+            <v-list tile dense flat min-width="100" >
+              <v-list-item light link v-for="(unlock, index) in attrs" :key="index"
+                :class="$route.query.unlock == unlock ? '_active' : ''"
+                @click="$router.push({name: 'headwears', query: query({unlock: unlock})})">
+                <v-list-item-title dense>{{ unlock }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </div>
+        <div class="all-sizes">
+          <v-menu z-index="9" max-height="300" bottom offset-y :close-on-click="closeOnClick">
+            <template v-slot:activator="{ on, attrs }">
+              <span class="v-btn__content" 
+                v-bind="attrs"
+                v-on="on">Deposit<v-icon>mdi-menu-down</v-icon></span>
+            </template>
+            <v-list tile dense flat min-width="100" >
+              <v-list-item light link v-for="(deposit, index) in attrs" :key="index"
+                :class="$route.query.deposit == deposit ? '_active' : ''"
+                @click="$router.push({name: 'headwears', query: query({deposit: deposit})})">
+                <v-list-item-title dense>{{ deposit }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </div>
+      </div>
+      <div class="headwears mt-7" v-for="headwear in headwears" :key="headwear.id">
         <router-link :to="{ name: 'headwear', params: { id: headwear.slug }}">
           <div class="card-details clearfix">
             <div class="image">
@@ -82,10 +132,54 @@ export default {
       item: {},
       loading: true,
       headwears: [],
-      page: 2
+      page: 2,
+      positions: [
+        'All',
+        'Head',
+        'Face',
+        'Mouth',
+        'Back',
+        'Tail',
+        'Costume',
+      ],
+      attrs: [
+        'All',
+        'Str',
+        'Agi',
+        'Vit',
+        'Int',
+        'Dex',
+        'Luk',
+        'Max HP',
+        'Max SP',
+        'Atk',
+        'Def',
+        'M.Atk',
+        'M.Def',
+        'Critical',
+        'Hit',
+        'Flee',
+        'Spd',
+      ],
+      closeOnClick: true,
+      q: this.$route.query,
+      fquery: this.$route.fullPath.replace("/headwears", "")
     };
   },
   methods: {
+    query(newQuery) {
+      return {
+        ...this.$route.query,
+        ...newQuery
+      }
+    },
+    filterHeadwears() {
+      axios
+        .get(constant.filterHeadwears + this.fquery)
+        .then(response => (this.headwears = response.data.data))
+        .catch(error => console.log(error))
+        .finally(() => (this.loading = false));
+    },
     getHeadwears() {
       axios
         .get(constant.getHeadwears)
@@ -95,21 +189,46 @@ export default {
     },
     loadmore($state) {
       let vm = this;
-      axios
-        .get(constant.getHeadwears + "?page=" + vm.page)
-        .then(response => {
-          response.data.data.map(function(value) {
-            vm.headwears.push(value);
-          });
-          vm.page += 1;
-          $state.loaded();
-        })
-        .catch(error => console.log(error))
-        .finally(() => console.log());
+      if(Object.entries(this.$route.query).length === 0) {
+        axios
+          .get(constant.getHeadwears + "?page=" + vm.page)
+          .then(response => {
+            response.data.data.map(function(value) {
+              vm.headwears.push(value);
+            });
+            if ((vm.page - 1) == response.data.last_page) {
+              $state.complete();
+            }
+            vm.page += 1;
+            $state.loaded();
+          })
+          .catch(error => console.log(error))
+          .finally(() => console.log());
+      } else {
+        axios
+          .get(constant.filterHeadwears + vm.fquery +'&page='+vm.page)
+          .then(response => {
+            response.data.data.map(function(value) {
+              vm.headwears.push(value);
+            });
+            if ((vm.page - 1) == response.data.last_page) {
+              $state.complete();
+            }
+            vm.page += 1;
+            $state.loaded();
+          })
+          .catch(error => console.log(error))
+          .finally(() => console.log());
+      }
+
     }
   },
   mounted() {
-    this.getHeadwears();
+    if (Object.entries(this.$route.query).length === 0) {
+      this.getHeadwears();
+    } else {
+      this.filterHeadwears();
+    }
   }
 };
 </script>

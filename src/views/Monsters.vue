@@ -1,6 +1,6 @@
 <template>
     <div class="content" v-if="!loading">
-      <!-- <div class="filters d-flex flex-row justify-center justify-space-around">
+      <div class="filters d-flex flex-row justify-center justify-space-around">
         <div class="all-races">
           <v-menu z-index="9" max-height="300" bottom offset-y :close-on-click="closeOnClick">
             <template v-slot:activator="{ on, attrs }">
@@ -8,9 +8,11 @@
                 v-bind="attrs"
                 v-on="on">Race<v-icon>mdi-menu-down</v-icon></span>
             </template>
-            <v-list tile>
-              <v-list-item link v-for="(race, index) in races" :key="index">
-                <v-list-item-title>{{ race }}</v-list-item-title>
+            <v-list tile dense flat min-width="100" >
+              <v-list-item light link v-for="(race, index) in races" :key="index"
+                :class="$route.query.race == race ? '_active' : ''"
+                @click="$router.push({name: 'monsters', query: query({race:race})})">
+                <v-list-item-title dense>{{ race }}</v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>
@@ -22,9 +24,11 @@
                 v-bind="attrs"
                 v-on="on">Element<v-icon>mdi-menu-down</v-icon></span>
             </template>
-            <v-list tile>
-              <v-list-item link v-for="(element, index) in elements" :key="index">
-                <v-list-item-title>{{ element }}</v-list-item-title>
+            <v-list tile dense min-width="100">
+              <v-list-item link v-for="(element, index) in elements" :key="index"
+                :class="$route.query.element == element ? '_active' : ''"
+                @click="$router.push({name: 'monsters', query: query({element:element})})">
+                <v-list-item-title dense>{{ element }}</v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>
@@ -36,8 +40,10 @@
                 v-bind="attrs"
                 v-on="on">Size<v-icon>mdi-menu-down</v-icon></span>
             </template>
-            <v-list tile>
-              <v-list-item link v-for="(size, index) in sizes" :key="index">
+            <v-list tile dense min-width="100">
+              <v-list-item link v-for="(size, index) in sizes" :key="index"
+                :class="$route.query.size == size ? '_active' : ''"
+                @click="$router.push({name: 'monsters', query: query({size:size})})">
                 <v-list-item-title>{{ size }}</v-list-item-title>
               </v-list-item>
             </v-list>
@@ -50,8 +56,10 @@
                 v-bind="attrs"
                 v-on="on">Type<v-icon>mdi-menu-down</v-icon></span>
             </template>
-            <v-list tile>
-              <v-list-item link v-for="(type, index) in types" :key="index">
+            <v-list tile dense min-width="100">
+              <v-list-item link v-for="(type, index) in types" :key="index"
+                :class="$route.query.type == type ? '_active' : ''"
+                @click="$router.push({name: 'monsters', query: query({type:type})})">
                 <v-list-item-title>{{ type }}</v-list-item-title>
               </v-list-item>
             </v-list>
@@ -64,15 +72,17 @@
                 v-bind="attrs"
                 v-on="on">Order by<v-icon>mdi-menu-down</v-icon></span>
             </template>
-            <v-list tile>
-              <v-list-item link v-for="(order, index) in orders" :key="index">
+            <v-list tile dense min-width="100">
+              <v-list-item link v-for="(order, index) in orders" :key="index"
+                :class="$route.query.order == order ? '_active' : ''"
+                @click="$router.push({name: 'monsters', query: query({order:order})})">
                 <v-list-item-title>{{ order }}</v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>
         </div>
-      </div> -->
-        <div class="card_ shadow border-0 mb-3" v-for="monster in monsters" :key="monster.slug">
+      </div>
+        <div class="card_ shadow border-0 mb-3 mt-7" v-for="monster in monsters" :key="monster.slug">
             <div class="card-body">
                 <div class="row">
                     <div class="monsters row no-gutters">
@@ -158,14 +168,33 @@ export default {
       races: ['All','Angel', 'Brute', 'DemiHuman', 'Demon', 'Dragon', 'Fish', 'Formless', 'Insect', 'Plant', 'Undead'],
       elements: ['All','Dark','Earth','Fire','Ghost', 'Holy','Neutral','Poison', 'Undead','Water','Wind'],
       sizes: ['All', 'Small', 'Medium', 'Large'],
-      types: ['All', 'Mini', 'MVP', 'Star', 'Undead'],
-      orders: ['All', 'Name ASC', 'Name Desc', 'Level ASC', 'Level Desc', 'Base Exp', 'Job Exp'],
+      types: ['All', 'Monster', 'MINI', 'MVP', 'Star', 'Undead'],
+      orders: ['Name ASC', 'Name Desc', 'Level ASC', 'Level Desc', 'Base Exp', 'Job Exp'],
+      q: this.$route.query,
+      fquery: this.$route.fullPath.replace("/monsters", "")
     }
   },
   mounted() {
-    this.getMonsters();
+    if (Object.entries(this.$route.query).length === 0) {
+      this.getMonsters();
+    } else {
+      this.filterMonsters();
+    }
   },
   methods: {
+    query(newQuery) {
+      return {
+        ...this.$route.query,
+        ...newQuery
+      }
+    },
+    filterMonsters() {
+      axios
+        .get(constant.filterMonsters + this.fquery)
+        .then(response => (this.monsters = response.data.data))
+        .catch(error => console.log(error))
+        .finally(() => this.loading = false)
+    },
     getMonsters() {
       axios
         .get(constant.getMonsters)
@@ -175,18 +204,37 @@ export default {
     },
     loadmore($state) {
       let vm = this;
-      axios
-        .get(constant.getMonsters+'?page='+vm.page)
-        .then(response => {
-          response.data.data.map(function(value) {
-              vm.monsters.push(value);
-          });
-          vm.page += 1;
-          $state.loaded();
-        })
-        .catch(error => console.log(error))
-        .finally(() => console.log())
-
+      if(Object.entries(this.$route.query).length === 0) {
+        axios
+          .get(constant.getMonsters+'?page='+vm.page)
+          .then(response => {
+            response.data.data.map(function(value) {
+                vm.monsters.push(value);
+            });
+            if ((vm.page - 1) == response.data.last_page) {
+              $state.complete();
+            }
+            vm.page += 1;
+            $state.loaded();
+          })
+          .catch(error => console.log(error))
+          .finally(() => console.log())
+      } else {
+        axios
+          .get(constant.filterMonsters + vm.fquery +'&page='+vm.page)
+          .then(response => {
+            response.data.data.map(function(value) {
+                vm.monsters.push(value);
+            });
+            if ((vm.page - 1) == response.data.last_page) {
+              $state.complete();
+            }
+            vm.page += 1;
+            $state.loaded();
+          })
+          .catch(error => console.log(error))
+          .finally(() => console.log())
+      }
     },
     formatNumber(num) {
       if (num != null) return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
@@ -195,51 +243,103 @@ export default {
 }
 </script>
 <style lang="scss">
+  @import '../assets/scss/mixins.scss';
   .filters {
-    padding: 0 0 10px;
+    padding: 10px 0 10px;
     position: fixed;
-    width: 630px;
     z-index: 9;
     background-color: #fafafa;
+    margin-top: -10px;
+    width: 640px;
+    margin-left: -10px; 
+
+    @media only screen and (max-width: 768px) {
+      width: 100%;  
+    }
+  }
+  .v-list-item__title {
+    font-weight: normal !important;
+  }
+  ._active {
+    background-color: #eee;
+    .v-list-item__title {
+      color: $primary;
+      font-weight: 600 !important;
+    }
   }
   .all-races {
     span {
-      font-size: 0.9em;
+      font-size: 0.8em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: $primary;
+      @media only screen and (max-width: 768px) {
+        font-weight: 500;
+      }
     }
     .v-icon {
       font-size: 1.5em;
+      color: $primary;
     }
   }
   .all-elements {
     span {
-      font-size: 0.9em;
+      font-size: 0.8em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: $primary;
+      @media only screen and (max-width: 768px) {
+        font-weight: 500;
+      }
     }
     .v-icon {
       font-size: 1.5em;
+      color: $primary;
     }
   }
   .all-sizes {
     span {
-      font-size: 0.9em;
+      font-size: 0.8em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: $primary;
+      @media only screen and (max-width: 768px) {
+        font-weight: 500;
+      }
     }
     .v-icon {
       font-size: 1.5em;
+      color: $primary;
     }
   }
   .all-types {
     span {
-      font-size: 0.9em;
+      font-size: 0.8em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: $primary;
+      @media only screen and (max-width: 768px) {
+        font-weight: 500;
+      }
     }
     .v-icon {
       font-size: 1.5em;
+      color: $primary;
     }
   }
   .order-by {
     span {
-      font-size: 0.9em;
+      font-size: 0.8em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: $primary;
+      @media only screen and (max-width: 768px) {
+        font-weight: 500;
+      }
     }
     .v-icon {
       font-size: 1.5em;
+      color: $primary;
     }
   }
 </style>

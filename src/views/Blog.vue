@@ -13,18 +13,13 @@
             <div
               class="fb-like"
               style="margin-bottom: 5px;"
-              :data-href="'guide/'+blog.slug"
+              :data-href="'https://ragnarokmobile.net/guide/'+blog.slug"
               data-layout="standard"
               data-action="like"
               data-size="small"
               data-show-faces="true"
-              data-share="true"></div>
-            <div class="pad30"></div>
-            <div
-              class="fb-comments"
-              :data-href="'guide/'+blog.slug"
-              data-numposts="5"
-              data-width="100%"></div>
+              data-share="true">
+            </div>
           </div>
           <div class="body" v-html="blog.content"></div>
         </div>
@@ -32,7 +27,7 @@
           <div
             class="fb-like"
             style="margin-bottom: 5px;"
-            :data-href="'guide/'+blog.slug"
+            :data-href="'https://ragnarokmobile.net/guide/'+blog.slug"
             data-layout="standard"
             data-action="like"
             data-size="small"
@@ -41,7 +36,7 @@
           <div class="pad30"></div>
           <div
             class="fb-comments"
-            :data-href="'guide/'+blog.slug"
+            :data-href="'https://ragnarokmobile.net/guide/'+blog.slug"
             data-numposts="5"
             data-width="100%"></div>
         </div>

@@ -3,7 +3,7 @@
         <div class="single equipment">
             <div class="single-row">
                 <div class="image-container">
-                    <div class="image" :class="equipment.type_name == 'Blueprint' ? 'blueprint' : ''">
+                    <div class="image" :class="equipment.type_name == 'Blueprint' ? 'blueprint' : (equipment.type_name == 'Furniture Blueprint' ? 'fblueprint' : '')">
                         <img :src="equipment.icon" :alt="equipment.name_en">
                     </div>
                 </div>
@@ -78,6 +78,29 @@
                         <img :src="equipment.item_to['icon']" alt="equipment.item_to['name_en']">
                       </div>
                       <router-link :to="{ name: 'headwear', params: { id: equipment.item_to['slug'] }}"> {{ equipment.item_to['name_en'] }} </router-link>
+                      </dd>
+                </dl>
+              </div>
+             </div>
+
+            <div v-if="equipment.type_name == 'Furniture Blueprint'">
+              <div class="attr clear">
+                <dl v-if="equipment.compose_id != null && equipment.item_from != null && equipment.item_from['id'] != equipment.id">
+                    <dt>Upgradable from</dt>
+                    <dd class="single-row">
+                      <div class="image">
+                        <img :src="equipment.item_from['icon']" :alt="equipment.item_from['name_en']">
+                      </div>
+                      <router-link :to="{ name: 'furniture', params: { id: equipment.item_from['slug'] }}"> {{ equipment.item_from['name_en'] }} </router-link>
+                    </dd>
+                </dl>
+                <dl v-if="equipment.compose_output_id != null && equipment.item_to != null">
+                    <dt>Upgradable to</dt>
+                    <dd class="single-row">              
+                      <div class="image">
+                        <img :src="equipment.item_to['icon']" alt="equipment.item_to['name_en']">
+                      </div>
+                      <router-link :to="{ name: 'furniture', params: { id: equipment.item_to['slug'] }}"> {{ equipment.item_to['name_en'] }} </router-link>
                       </dd>
                 </dl>
               </div>

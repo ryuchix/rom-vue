@@ -1,6 +1,56 @@
 <template>
     <div class="content" v-if="!loading">
-         <div class="equipments" v-for="equipment in equipments" :key="equipment.id">
+      <div class="filters d-flex flex-row justify-center justify-space-around">
+        <div class="all-races">
+          <v-menu z-index="9" max-height="300" bottom offset-y :close-on-click="closeOnClick">
+            <template v-slot:activator="{ on, attrs }">
+              <span class="v-btn__content" 
+                v-bind="attrs"
+                v-on="on">Jobs<v-icon>mdi-menu-down</v-icon></span>
+            </template>
+            <v-list tile dense flat min-width="100" >
+              <v-list-item light link v-for="(job, index) in jobs" :key="index"
+                :class="$route.query.job == job ? '_active' : ''"
+                @click="$router.push({name: 'equipments', query: query({job: job})})">
+                <v-list-item-title dense>{{ job }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </div>
+        <div class="all-elements">
+          <v-menu max-height="300" bottom offset-y :close-on-click="closeOnClick">
+            <template v-slot:activator="{ on, attrs }">
+              <span class="v-btn__content" 
+                v-bind="attrs"
+                v-on="on">Position<v-icon>mdi-menu-down</v-icon></span>
+            </template>
+            <v-list tile dense min-width="100">
+              <v-list-item link v-for="(position, index) in positions" :key="index"
+                :class="$route.query.position == position ? '_active' : ''"
+                @click="$router.push({name: 'equipments', query: query({position: position})})">
+                <v-list-item-title dense>{{ position }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </div>
+        <div class="all-sizes">
+          <v-menu :disabled="menuDisabled" max-height="300" bottom offset-y :close-on-click="closeOnClick">
+            <template v-slot:activator="{ on, attrs }">
+              <span class="v-btn__content" 
+                v-bind="attrs"
+                v-on="on">Weapon Type<v-icon>mdi-menu-down</v-icon></span>
+            </template>
+            <v-list tile dense min-width="100">
+              <v-list-item link v-for="(type, index) in weapon_types" :key="index"
+                :class="$route.query.type == type ? '_active' : ''"
+                @click="$router.push({name: 'equipments', query: query({type:type})})">
+                <v-list-item-title>{{ type }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </div>
+      </div>
+         <div class="equipments mt-7" v-for="equipment in equipments" :key="equipment.id">
            <router-link :to="{ name: 'equipment', params: { id: equipment.slug }}" >
             <div class="equipment-details clearfix">
                 <div class="image">
@@ -77,9 +127,72 @@ export default {
       loading: true,
       equipments: [],
       page: 2,
+      menuDisabled: true,
+      closeOnClick: true,
+      jobs: [
+        'All',
+        'Advanced Novice',
+        'Alchemist',
+        'Assassin',
+        'Bard',
+        'Blacksmith',
+        'Crusader',
+        'Dancer',
+        'Doram',
+        'Hunter',
+        'Knight',
+        'Monk',
+        'Priest',
+        'Rouge',
+        'Sage',
+        'Wizard'],
+      positions: [
+        'All',
+        'Off-hand',
+        'Armor',
+        'Garment',
+        'Footgear',
+        'Accessory',
+        'Weapon'
+      ],
+      weapon_types: [
+        'All',
+        'Spear',
+        'Sword',
+        'Staff',
+        'Katar',
+        'Bow',
+        'Mace',
+        'Axe',
+        'Book',
+        'Dagger',
+        'Musical Instrument',
+        'Whips',
+        'Knuckles'
+      ],
+      q: this.$route.query,
+      fquery: this.$route.fullPath.replace("/equipments", "")
     }
   },
   methods: {
+    query(newQuery) {
+      if (this.$route.query.position == 'Weapon') {
+        this.menuDisabled = false
+      } else {
+        this.menuDisabled = true
+      }
+      return {
+        ...this.$route.query,
+        ...newQuery
+      }
+    },
+    filterEquipments() {
+      axios
+        .get(constant.filterEquipments + this.fquery)
+        .then(response => (this.equipments = response.data.data))
+        .catch(error => console.log(error))
+        .finally(() => this.loading = false)
+    },
     getEquipments() {
       axios
         .get(constant.getEquipments)
@@ -89,39 +202,66 @@ export default {
     },
     loadmore($state) {
       let vm = this;
-      axios
-        .get(constant.getEquipments+'?page='+vm.page)
-        .then(response => {
-          response.data.data.map(function(value) {
-              vm.equipments.push(value);
-          });
-          vm.page += 1;
-          $state.loaded();
-        })
-        .catch(error => console.log(error))
-        .finally(() => console.log())
-
+      if(Object.entries(this.$route.query).length === 0) {
+        axios
+          .get(constant.getEquipments+'?page='+vm.page)
+          .then(response => {
+            response.data.data.map(function(value) {
+                vm.equipments.push(value);
+            });
+            if ((vm.page - 1) == response.data.last_page) {
+              $state.complete();
+            }
+            vm.page += 1;
+            $state.loaded();
+          })
+          .catch(error => console.log(error))
+          .finally(() => console.log())
+      } else {
+        axios
+          .get(constant.filterEquipments + vm.fquery +'&page='+vm.page)
+          .then(response => {
+            response.data.data.map(function(value) {
+                vm.equipments.push(value);
+            });
+            if ((vm.page - 1) == response.data.last_page) {
+              $state.complete();
+            }
+            vm.page += 1;
+            $state.loaded();
+          })
+          .catch(error => console.log(error))
+          .finally(() => console.log())
+      }
     },
     formatNumber(num) {
       return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
     }
   },
   mounted () {
+    this.menuDisabled = this.$route.query.position != 'Weapon'
+    if (Object.entries(this.$route.query).length === 0) {
       this.getEquipments();
-  },
-    computed: {
-        nonNullItems: function() {
-            return this.items.filter(function(item) {
-            return item !== null;
-            });
-        }
+    } else {
+      this.filterEquipments();
     }
+  },
+  computed: {
+      nonNullItems: function() {
+          return this.items.filter(function(item) {
+          return item !== null;
+          });
+      }
+  }
 }
 </script>
 <style lang="scss">
   .equipments {
     a {
       height: fit-content;
+    }
+    ._active {
+      background-color: #eee;
     }
   }
 </style>

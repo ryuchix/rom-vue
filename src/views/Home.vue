@@ -52,6 +52,14 @@
                 </div>
               </div>
             </router-link>
+              <router-link tabindex :to="{ name: 'furnitures'}" class="col col-3">
+              <div>
+                <div class="icons">
+                  <img class="icon" src="../assets/images/icons/furniture-icon.png" alt="Ragnarok Mobile Furniture Icon"/>
+                  <span>Furniture</span>
+                </div>
+              </div>
+              </router-link>
               <div class="col col-3" tabindex>
                 <div class="icons">
                   <img class="icon" src="../assets/images/icons/pet-icon.png" alt="Ragnarok Mobile Pet Icon"/>
@@ -64,21 +72,15 @@
                   <span>Food</span>
                 </div>
               </div>
-              <div class="col col-3" tabindex>
-                <div class="icons">
-                  <img class="icon" src="../assets/images/icons/furniture-icon.png" alt="Ragnarok Mobile Furniture Icon"/>
-                  <span>Furniture</span>
-                </div>
-              </div>
           </div>
         </section>
 
         <section class="appicons mt-2 mb-5">
-          <div class="apps d-flex justify-center mt-4">
-            <router-link tabindex :to="{name: 'endless-tower'}" class="d-flex pointer playstore mr-3" v-ripple>
-              Endless Tower MVP/Mini List
-            </router-link> | 
-            <router-link tabindex :to="{name: 'valhalla-ruins'}" class="d-flex pointer appstore ml-3" v-ripple>
+          <div class="apps container center mt-4">
+            <router-link tabindex :to="{name: 'endless-tower'}" class="playstore col-12" v-ripple>
+              Endless Tower MVP/Mini List (SEA)
+            </router-link>
+            <router-link tabindex :to="{name: 'valhalla-ruins'}" class="appstore col-12" v-ripple>
               Valhalla Ruins Map
             </router-link>  
             <!-- <div class="playstore mr-3">
@@ -94,6 +96,13 @@
           <div class="contents">
             <h3 class="subtit">Guides</h3>
             <ul class="list_news">
+              <li>
+                  <div class="news_tit" v-ripple>
+                    <router-link tabindex :to="{name: 'quiz'}" class="d-flex pointer">
+                      <span @click="$router.push({name: 'quiz'})" class="tit">Monster quiz in Wasteland</span>
+                    </router-link>
+                  </div>
+              </li>
               <li v-for="blog in BlogsToDisplay" :key="blog.id" class>
                   <div class="news_tit" v-ripple>
                     <router-link tabindex :to="{name: 'guide', params: {slug: blog.slug}}" class="d-flex pointer">
@@ -111,8 +120,6 @@
             </v-col>
           </div>
         </section>
-
-        
         <section class="footer-section">
           <p class="copyright center">
             © RagnarokMobile.net 2018 - 2020 | All Rights Reserved</p>

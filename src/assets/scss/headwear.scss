@@ -177,6 +177,10 @@
                 border: 1px solid #c6a460;
                 background-size: cover;
             }
+            &.fblueprint {
+                border: 1px solid #4b8ad5;
+                background-color: #4b8ad5;
+            }
         }
         img {
             border: 1px solid $white !important;
@@ -419,6 +423,15 @@
             border: 1px solid #c6a460;
             background-size: cover;
 
+            img {
+                padding: 2px;
+                border: 1px solid $white;
+            }
+        }
+
+        &.fblueprint {
+            border: 1px solid #4b8ad5;
+            background-color: #4b8ad5;            
             img {
                 padding: 2px;
                 border: 1px solid $white;

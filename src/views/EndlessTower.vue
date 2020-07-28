@@ -2,16 +2,43 @@
   <div id="privacy">
     <v-app>
       <div class="content">
-        <h1 class="mb-3">Endless Tower</h1>
+        <h2 class="mb-3">Endless Tower SEA (ET)</h2>
         <p>Endless Tower resets every Monday at 6PM GMT+8 on SEA and Global Server. Selected floors consists of MVPS and Mini bosses and they are based on the last digit of the channel you are in. Example, if you are in PH25, all channels that ends in 5 like 5, 15, 25, 35 etc will have the same monsters.</p>
-        <img :src="result.et" alt="Endless Tower MVP">
-        <img :src="result.etmini" alt="Endless Tower Mini">
+        <h3>{{ result.date }}</h3>
+        <img :src="result.et" alt="Endless Tower MVP" style="width: 100%;"> <br><br>
+        <img v-if="result.etmini != 0" :src="result.etmini" alt="Endless Tower Mini" style="width: 100%;">
         <br><br>
-        <h1 class="mb-3">Valhalla Ruins Maps</h1>
-        <p>This page is updated weekly. Valhalla Ruins or Guild Ruins VR/GR is a dungeon quest for all members of the guild. The ruins consist of 5 doors, by default the portals are closed and you need Silver Medal to open it. Your need to reach a certain level to enter the dungeon, level 40, 60, 80, 100 and 120. Each door needs 40 silver medals. Unlike Endless Tower the VR/GR maps are the same across all Guilds in all channels.</p>
-        <img :src="result.vr" alt="Valhalla Ruins Maps">
+        <h2 class="mb-3">Valhalla Ruins (VR) Maps</h2>
+        <p>Valhalla Ruins or Guild Ruins VR/GR is a dungeon quest for all members of the guild. The ruins consist of 5 doors, by default the portals are closed and you need Silver Medal to open it. Your need to reach a certain level to enter the dungeon, level 40, 60, 80, 100 and 120. Each door needs 40 silver medals. Unlike Endless Tower the VR/GR maps are the same across all Guilds in all channels.</p>
+        <h3>{{ result.date }}</h3>
+        <img :src="result.vr" alt="Valhalla Ruins Maps" style="width: 100%;">
         <br><br>
-        <p>Images are not ours. Credits to orignal uploader. Thanks</p>
+        <div v-if="result.etglobal != 0">
+          <h2 class="mb-3">Endless Tower Global (ET)</h2>
+          <p>Endless Tower resets every Monday at 6PM GMT+8 on SEA and Global Server. Selected floors consists of MVPS and Mini bosses and they are based on the last digit of the channel you are in. Example, if you are in PH25, all channels that ends in 5 like 5, 15, 25, 35 etc will have the same monsters.</p>
+          <h3>{{ result.date }}</h3>
+          <img :src="result.etglobal" alt="Endless Tower Global MVP" style="width: 100%;"> <br><br>
+          <img v-if="result.etglobalmini != 0" :src="result.etglobalmini" alt="Endless Tower Global Mini" style="width: 100%;">
+        </div>
+        <br><br>
+        <p><em>Images are not ours. Credit to original uploader. Thanks</em></p>
+        <div class="comments">
+          <div
+            class="fb-like"
+            style="margin-bottom: 5px;"
+            data-href="https://ragnarokmobile.net/endless-tower"
+            data-layout="standard"
+            data-action="like"
+            data-size="small"
+            data-show-faces="true"
+            data-share="true"></div>
+          <div class="pad30"></div>
+          <div
+            class="fb-comments"
+            data-href="https://ragnarokmobile.net/endless-tower"
+            data-numposts="5"
+            data-width="100%"></div>
+        </div>
       </div>
     </v-app>
   </div>
@@ -23,9 +50,9 @@ import { constant } from "../router/Constant";
 export default {
   name: "EndlessTower",
   metaInfo() {
-    let title_ = "Endless Tower | Ragnarok Mobile - Guide, Quest, Build and Database for Ragnarok M Eternal Love"
+    let title_ = "Endless Tower SEA and Global| Ragnarok Mobile - Guide, Quest, Build and Database for Ragnarok M Eternal Love"
     let url_ = 'https://www.ragnarokmobile.net/endless-tower'
-    let keywords_ = 'ragnarok mobile privacy policy, ROM, ROM Exchange price, market finance, Ragnarok, online, RO, ragnarok mobile, ragnarok m, ragnarok eternal love, database, guide, job, quest, headgear quest, monster drops, item information, skill description, skill simulator, stat calculator, ragnarok tools, ragnarok mobile english'
+    let keywords_ = 'ragnarok mobile endless tower SEA and Global, ROM, ROM Exchange price, market finance, Ragnarok, online, RO, ragnarok mobile, ragnarok m, ragnarok eternal love, database, guide, job, quest, headgear quest, monster drops, item information, skill description, skill simulator, stat calculator, ragnarok tools, ragnarok mobile english'
     let description_ = 'Endless Tower Floor Monsters List, Endless Tower SEA Global MVP, Endless Tower Mini. Endless Tower resets every Monday at 6PM GMT+8 on SEA Server.'
     return {
       title: title_,

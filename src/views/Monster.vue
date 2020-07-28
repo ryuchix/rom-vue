@@ -15,9 +15,9 @@
                         </div>
                         <div class="item-title-info">
                             <div class="type">
-                                <a href="javascript:void(0)">{{ monster.element }}</a><span> · </span>
-                                <a href="javascript:void(0)">{{ monster.race }}</a><span> · </span>
-                                <a href="javascript:void(0)">{{ monster.size }}</a>
+                                <router-link :to="{ name: 'monsters', query: { element: monster.element }}">{{ monster.element }}</router-link> <span> · </span>
+                                <router-link :to="{ name: 'monsters', query: { race: monster.race }}">{{ monster.race }}</router-link><span> · </span>
+                                <router-link :to="{ name: 'monsters', query: { size: monster.size }}">{{ monster.size }}</router-link>
                             </div>
                         </div>
                     </div>
@@ -41,19 +41,19 @@
                     </dl>
                     <dl>
                         <dt>Type</dt>
-                        <dd><a href="#">{{ monster.type == 'mini' ? 'Mini' : '' }} {{ monster.type == 'Normal' ? 'Normal' : '' }} {{ monster.type == 'mvp' ? 'MVP' : '' }}</a></dd>
+                        <dd>{{ monster.type == 'mini' ? 'Mini' : '' }} {{ monster.type == 'Normal' ? 'Normal' : '' }} {{ monster.type == 'mvp' ? 'MVP' : '' }}</dd>
                     </dl>
                     <dl>
                         <dt>Race</dt>
-                        <dd>{{ monster.race }}</dd>
+                        <dd><router-link :to="{ name: 'monsters', query: { race: monster.race }}">{{ monster.race }}</router-link></dd>
                     </dl>
                     <dl>
                         <dt>Element</dt>
-                        <dd>{{ monster.element }}</dd>
+                        <dd><router-link :to="{ name: 'monsters', query: { element: monster.element }}">{{ monster.element }}</router-link></dd>
                     </dl>
                     <dl>
                         <dt>Size</dt>
-                        <dd>{{ monster.size }}</dd>
+                        <dd><router-link :to="{ name: 'monsters', query: { size: monster.size }}">{{ monster.size }}</router-link></dd>
                     </dl>
                     <dl>
                         <dt>Base exp</dt>
