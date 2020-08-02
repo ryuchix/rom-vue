@@ -60,12 +60,14 @@
                 </div>
               </div>
               </router-link>
-              <div class="col col-3" tabindex>
+              <router-link tabindex :to="{ name: 'pets'}" class="col col-3">
+              <div>
                 <div class="icons">
                   <img class="icon" src="../assets/images/icons/pet-icon.png" alt="Ragnarok Mobile Pet Icon"/>
                   <span>Pet</span>
                 </div>
               </div>
+            </router-link>
               <div class="col col-3" tabindex>
                 <div class="icons">
                   <img class="icon" src="../assets/images/icons/food-icon.png" alt="Ragnarok Mobile Food Icon"/>

@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Monsters from '../views/Monsters.vue'
 import Monster from '../views/Monster.vue'
+import Pets from '../views/Pets.vue'
+import Pet from '../views/Pet.vue'
 import Equipment from '../views/Equipment.vue'
 import Equipments from '../views/Equipments.vue'
 import Card from '../views/Card.vue'
@@ -75,6 +77,16 @@ Vue.use(VueRouter)
     path: '/card/:id',
     name: 'card',
     component: Card
+  },
+  {
+    path: '/pets',
+    name: 'pets',
+    component: Pets
+  },
+  {
+    path: '/pet/:id',
+    name: 'pet',
+    component: Pet
   },
   {
     path: '/headwears',

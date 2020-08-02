@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.7b4c7dc5ec2879d2b8abce17650a8c5b.js"
+  "/precache-manifest.00b13689ccb97f10d2d4081cebcf3b86.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "rom-vue"});

@@ -218,7 +218,7 @@
                     <v-expansion-panel-header>
                       <div class="attr" style="border: 0; margin-top: 0px;">
                       <dl>
-                        <dd class="single-row" style="padding-left: 10px; font-size: 1em;">
+                        <dd v-if="synth['item_output'] != null && synth['item_output'].length > 0" class="single-row" style="padding-left: 10px; font-size: 1em;">
                           <div class="image">
                             <img :src="synth['item_output']['icon']" :alt="synth['item_output']['name_en']">
                           </div>

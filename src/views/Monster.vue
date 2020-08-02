@@ -35,7 +35,7 @@
                         <dt>Level</dt>
                         <dd>{{ monster.level }}</dd>
                     </dl>
-                    <dl>
+                    <dl style="border-top: none;">
                         <dt>HP</dt>
                         <dd>{{ formatNumber(monster.hp) }}</dd>
                     </dl>
@@ -121,6 +121,11 @@
                     </dl>
                 </div>
             </div>
+            <div class="clear"></div>
+            <div class="sub-heading">
+                <h3>Elemental Converter</h3>
+            </div>
+            <Elemental :element="monster.element"></Elemental>
             <div v-if="monster.items != null && monster.items.length > 0">
                 <div class="sub-heading clear">
                     <h3>Drops</h3>
@@ -179,11 +184,12 @@
 <script>
 import axios from 'axios'
 import { constant } from '../router/Constant';
+import Elemental from '@/components/Elements/Elemental.vue';
 
 export default {
   name: 'Home',
   components: {
-    //
+    Elemental
   },
   metaInfo() {
     let name_ = this.monster.name_en;

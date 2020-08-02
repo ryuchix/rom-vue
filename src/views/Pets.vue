@@ -11,7 +11,7 @@
             <v-list tile dense flat min-width="100" >
               <v-list-item light link v-for="(race, index) in races" :key="index"
                 :class="$route.query.race == race ? '_active' : ''"
-                @click="$router.push({name: 'monsters', query: query({race:race})})">
+                @click="$router.push({name: 'pets', query: query({race:race})})">
                 <v-list-item-title dense>{{ race }}</v-list-item-title>
               </v-list-item>
             </v-list>
@@ -27,7 +27,7 @@
             <v-list tile dense min-width="100">
               <v-list-item link v-for="(element, index) in elements" :key="index"
                 :class="$route.query.element == element ? '_active' : ''"
-                @click="$router.push({name: 'monsters', query: query({element:element})})">
+                @click="$router.push({name: 'pets', query: query({element:element})})">
                 <v-list-item-title dense>{{ element }}</v-list-item-title>
               </v-list-item>
             </v-list>
@@ -43,7 +43,7 @@
             <v-list tile dense min-width="100">
               <v-list-item link v-for="(size, index) in sizes" :key="index"
                 :class="$route.query.size == size ? '_active' : ''"
-                @click="$router.push({name: 'monsters', query: query({size:size})})">
+                @click="$router.push({name: 'pets', query: query({size:size})})">
                 <v-list-item-title>{{ size }}</v-list-item-title>
               </v-list-item>
             </v-list>
@@ -54,29 +54,13 @@
             <template v-slot:activator="{ on, attrs }">
               <span class="v-btn__content" 
                 v-bind="attrs"
-                v-on="on">Type<v-icon>mdi-menu-down</v-icon></span>
+                v-on="on">Unlock<v-icon>mdi-menu-down</v-icon></span>
             </template>
             <v-list tile dense min-width="100">
               <v-list-item link v-for="(type, index) in types" :key="index"
                 :class="$route.query.type == type ? '_active' : ''"
-                @click="$router.push({name: 'monsters', query: query({type:type})})">
+                @click="$router.push({name: 'pets', query: query({type:type})})">
                 <v-list-item-title>{{ type }}</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
-        </div>
-        <div class="order-by">
-          <v-menu max-height="300" bottom offset-y :close-on-click="closeOnClick">
-            <template v-slot:activator="{ on, attrs }">
-              <span class="v-btn__content" 
-                v-bind="attrs"
-                v-on="on">Order by<v-icon>mdi-menu-down</v-icon></span>
-            </template>
-            <v-list tile dense min-width="100">
-              <v-list-item link v-for="(order, index) in orders" :key="index"
-                :class="$route.query.order == order ? '_active' : ''"
-                @click="$router.push({name: 'monsters', query: query({order:order})})">
-                <v-list-item-title>{{ order }}</v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>
@@ -87,25 +71,23 @@
                 <div class="row">
                     <div class="monsters row no-gutters">
                         <div class="col-sm-12 col-12">
-                          <router-link :to="{ name: 'monster', params: { id: monster.slug }}">
+                          <router-link :to="{ name: 'pet', params: { id: monster.slug }}">
                             <div class="monster-details">
-                                <div class="monster-image" :class="monster.star != 'star' ? monster.type : 'star'">
-                                    <img :src="monster.icon" :alt="monster.name_en">
+                                <div class="monster-image d-flex flex-column">
+                                    <img :src="monster.icon" :alt="monster.name">
                                 </div>
+                                <div :class="'star-'+ monster.star"></div>
                             </div>
                           </router-link>
-                            <div class="monster-info">
-                              <router-link :to="{ name: 'monster', params: { id: monster.slug }}">
-                                <div class="monster-name">{{ monster.name_en }}</div>
+                            <div class="monster-info" style="align-self: baseline;">
+                              <router-link :to="{ name: 'pet', params: { id: monster.slug }}">
+                                <div class="monster-name">{{ monster.name }}</div>
                               </router-link>
                                 <div class="monster-attr">
                                     <div class="monster-stats_">
                                         {{ monster.element }}<span> · </span>
                                         {{ monster.race }}<span> · </span>
                                         {{ monster.size }}
-                                    </div>
-                                    <div class="monster-stats">
-                                        Lv: <strong>{{ monster.level }}</strong> <span> · </span> HP: <strong>{{ formatNumber(monster.hp) }}</strong>
                                     </div>
                                 </div>
                             </div>
@@ -126,7 +108,7 @@ import { constant } from '../router/Constant';
 import InfiniteLoading from 'vue-infinite-loading';
 
 export default {
-  name: 'Monsters',
+  name: 'Pets',
   components: {
     InfiniteLoading
   },
@@ -168,17 +150,16 @@ export default {
       races: ['All','Angel', 'Brute', 'DemiHuman', 'Demon', 'Dragon', 'Fish', 'Formless', 'Insect', 'Plant', 'Undead'],
       elements: ['All','Earth','Fire','Ghost', 'Holy','Neutral','Poison','Shadow','Undead','Water','Wind'],
       sizes: ['All', 'Small', 'Medium', 'Large'],
-      types: ['All', 'Monster', 'MINI', 'MVP', 'Star', 'Undead'],
-      orders: ['Name ASC', 'Name Desc', 'Level ASC', 'Level Desc', 'Base Exp', 'Job Exp'],
+      unlocks: ['All', 'Max HP', 'Max SP', 'Atk', 'M.Atk', 'Def', 'M.Def'],
       q: this.$route.query,
       fquery: this.$route.fullPath.replace("/monsters", "")
     }
   },
   mounted() {
     if (Object.entries(this.$route.query).length === 0) {
-      this.getMonsters();
+      this.getPets();
     } else {
-      this.filterMonsters();
+      this.filterPets();
     }
   },
   methods: {
@@ -190,14 +171,14 @@ export default {
     },
     filterMonsters() {
       axios
-        .get(constant.filterMonsters + this.fquery)
+        .get(constant.filterPets + this.fquery)
         .then(response => (this.monsters = response.data.data))
         .catch(error => console.log(error))
         .finally(() => this.loading = false)
     },
-    getMonsters() {
+    getPets() {
       axios
-        .get(constant.getMonsters)
+        .get(constant.getPets)
         .then(response => (this.monsters = response.data.data))
         .catch(error => console.log(error))
         .finally(() => this.loading = false)
@@ -206,7 +187,7 @@ export default {
       let vm = this;
       if(Object.entries(this.$route.query).length === 0) {
         axios
-          .get(constant.getMonsters+'?page='+vm.page)
+          .get(constant.getPets+'?page='+vm.page)
           .then(response => {
             response.data.data.map(function(value) {
                 vm.monsters.push(value);
@@ -221,7 +202,7 @@ export default {
           .finally(() => console.log())
       } else {
         axios
-          .get(constant.filterMonsters + vm.fquery +'&page='+vm.page)
+          .get(constant.filterPets + vm.fquery +'&page='+vm.page)
           .then(response => {
             response.data.data.map(function(value) {
                 vm.monsters.push(value);

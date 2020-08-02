@@ -52,7 +52,7 @@ body {
 }
 
 a {
-    color: $linkcolor;
+    color: $primary !important;
     text-decoration: none;
     display: inline-block;
     position: relative;
