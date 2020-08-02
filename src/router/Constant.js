@@ -23,9 +23,9 @@ export const constant = {
   getFurnitures: 'https://api.ragnarokmobile.net/api/furnitures',
   filterFurnitures: 'https://api.ragnarokmobile.net/api/filter-furnitures',
 
-  getPet: 'http://127.0.0.1:8000/api/pet/',
-  getPets: 'http://127.0.0.1:8000/api/pets',
-  filterPets: 'http://127.0.0.1:8000/api/filter-pets',
+  getPet: 'https://api.ragnarokmobile.net/api/pet/',
+  getPets: 'https://api.ragnarokmobile.net/api/pets',
+  filterPets: 'https://api.ragnarokmobile.net/api/filter-pets',
 
   getBlog: 'https://api.ragnarokmobile.net/api/blog/',
   getBlogs: 'https://api.ragnarokmobile.net/api/blogs',
